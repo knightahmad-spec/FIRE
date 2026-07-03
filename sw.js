@@ -1,4 +1,4 @@
-const CACHE_NAME = "trader-lab-v5";
+const CACHE_NAME = "trader-lab-v4";
 
 const ASSETS = [
   "./",
