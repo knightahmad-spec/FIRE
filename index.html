@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+
   <title>Trader Financial Freedom Lab</title>
+
   <link rel="manifest" href="./manifest.json">
   <meta name="theme-color" content="#070A12">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -11,64 +13,426 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <style>
-    :root{
-      --bg:#070A12;--card:rgba(255,255,255,.08);--card2:rgba(255,255,255,.12);
-      --txt:#F7FAFC;--muted:#AAB3C5;--cyan:#67E8F9;--violet:#8B5CF6;
-      --green:#22C55E;--yellow:#FACC15;--red:#FB7185;--blue:#60A5FA;
-      --border:rgba(255,255,255,.13);--r:22px;
+    :root {
+      --bg: #070A12;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.12);
+      --txt: #F7FAFC;
+      --muted: #AAB3C5;
+      --cyan: #67E8F9;
+      --violet: #8B5CF6;
+      --green: #22C55E;
+      --yellow: #FACC15;
+      --red: #FB7185;
+      --blue: #60A5FA;
+      --border: rgba(255,255,255,.13);
+      --r: 22px;
     }
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    body{
-      margin:0;padding:16px 16px 80px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-      color:var(--txt);background:
-      radial-gradient(circle at 85% 0%,rgba(139,92,246,.45),transparent 34%),
-      radial-gradient(circle at 5% 0%,rgba(103,232,249,.25),transparent 32%),
-      linear-gradient(180deg,#070A12,#0B1020 55%,#05070D);
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
     }
-    .app{max-width:1100px;margin:auto}
-    h1{font-size:29px;margin:14px 0 6px;letter-spacing:-.5px}
-    p{color:var(--muted);line-height:1.8;font-size:14px}
-    .badge{display:inline-block;padding:8px 12px;border:1px solid rgba(103,232,249,.25);
-      background:rgba(103,232,249,.1);border-radius:999px;color:var(--cyan);font-size:13px}
-    .grid{display:grid;grid-template-columns:1fr;gap:14px}
-    @media(min-width:800px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(4,1fr)}}
-    .card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;
-      backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,.3)}
-    .card h2{font-size:17px;margin:0 0 12px}
-    label{display:block;color:var(--muted);font-size:12px;margin:11px 0 6px}
-    input,select{width:100%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.09);
-      color:var(--txt);border-radius:15px;padding:12px 13px;font-size:15px;outline:none}
-    input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(103,232,249,.12)}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    button{border:0;border-radius:16px;padding:13px 12px;color:white;font-weight:800;font-size:14px;
-      background:linear-gradient(135deg,var(--violet),var(--cyan));margin-top:12px;width:100%}
-    button.secondary{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14)}
-    .metric{background:rgba(255,255,255,.075);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:14px}
-    .k{color:var(--muted);font-size:12px;margin-bottom:7px}.v{font-size:22px;font-weight:900}.s{color:var(--muted);font-size:12px;margin-top:7px;line-height:1.6}
-    .status{background:linear-gradient(135deg,rgba(103,232,249,.14),rgba(139,92,246,.18));border:1px solid rgba(103,232,249,.22);
-      border-radius:24px;padding:17px;margin:14px 0}
-    .stage{font-size:25px;font-weight:950;margin-bottom:7px}
-    .bar{height:11px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin-top:12px}
-    .fill{height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--green));border-radius:99px}
-    canvas{width:100%;height:260px;background:rgba(0,0,0,.2);border:1px solid rgba(255,255,255,.1);border-radius:18px;margin-top:8px}
-    .pill{display:inline-block;font-size:12px;padding:5px 9px;margin:3px;border-radius:99px;background:rgba(255,255,255,.1);color:var(--muted)}
-    .note{color:var(--muted);font-size:12px;line-height:1.8;margin-top:10px}
-    .green{color:var(--green)}.yellow{color:var(--yellow)}.red{color:var(--red)}.cyan{color:var(--cyan)}
-    .scenario{padding:13px;border-radius:17px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}
-    .scenario b{font-size:15px}
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      padding: 16px 16px 90px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--txt);
+      background:
+        radial-gradient(circle at 85% 0%, rgba(139,92,246,.45), transparent 34%),
+        radial-gradient(circle at 5% 0%, rgba(103,232,249,.25), transparent 32%),
+        linear-gradient(180deg, #070A12, #0B1020 55%, #05070D);
+    }
+
+    .app {
+      max-width: 1120px;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 29px;
+      margin: 14px 0 6px;
+      letter-spacing: -.5px;
+    }
+
+    p {
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 14px;
+    }
+
+    .top-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border: 1px solid rgba(103,232,249,.25);
+      background: rgba(103,232,249,.1);
+      border-radius: 999px;
+      color: var(--cyan);
+      font-size: 13px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media(min-width:800px) {
+      .two { grid-template-columns: 1fr 1fr; }
+      .three { grid-template-columns: repeat(3,1fr); }
+      .four { grid-template-columns: repeat(4,1fr); }
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      padding: 16px;
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      box-shadow: 0 20px 50px rgba(0,0,0,.3);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(103,232,249,.22);
+      background: rgba(255,255,255,.095);
+    }
+
+    .card h2 {
+      font-size: 17px;
+      margin: 0 0 12px;
+    }
+
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin: 11px 0 6px;
+    }
+
+    input, select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.09);
+      color: var(--txt);
+      border-radius: 15px;
+      padding: 12px 13px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease, transform .12s ease;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 4px rgba(103,232,249,.12);
+      background: rgba(255,255,255,.12);
+    }
+
+    input.bump, select.bump {
+      animation: inputBump .25s ease;
+    }
+
+    @keyframes inputBump {
+      0% { transform: scale(1); }
+      45% { transform: scale(1.025); }
+      100% { transform: scale(1); }
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    button {
+      border: 0;
+      border-radius: 16px;
+      padding: 13px 12px;
+      color: white;
+      font-weight: 800;
+      font-size: 14px;
+      background: linear-gradient(135deg,var(--violet),var(--cyan));
+      margin-top: 12px;
+      width: 100%;
+      cursor: pointer;
+      box-shadow: 0 12px 26px rgba(103,232,249,.16);
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease, background .12s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button:active {
+      transform: scale(.97);
+      filter: brightness(1.14);
+      box-shadow: 0 8px 18px rgba(103,232,249,.12);
+    }
+
+    button.secondary {
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: none;
+    }
+
+    button.danger {
+      background: rgba(251,113,133,.16);
+      border: 1px solid rgba(251,113,133,.34);
+      color: #fecdd3;
+      box-shadow: none;
+    }
+
+    button.success {
+      background: rgba(34,197,94,.17);
+      border: 1px solid rgba(34,197,94,.35);
+      color: #bbf7d0;
+      box-shadow: none;
+    }
+
+    .btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .metric {
+      background: rgba(255,255,255,.075);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px;
+      padding: 14px;
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .metric:hover {
+      transform: translateY(-1px);
+      border-color: rgba(103,232,249,.2);
+    }
+
+    .k {
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 7px;
+    }
+
+    .v {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: -.4px;
+    }
+
+    .s {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 7px;
+      line-height: 1.6;
+    }
+
+    .status {
+      background: linear-gradient(135deg, rgba(103,232,249,.14), rgba(139,92,246,.18));
+      border: 1px solid rgba(103,232,249,.22);
+      border-radius: 24px;
+      padding: 17px;
+      margin: 14px 0;
+      transition: border-color .2s ease, transform .2s ease;
+    }
+
+    .status.flash {
+      animation: statusFlash .45s ease;
+    }
+
+    @keyframes statusFlash {
+      0% { transform: scale(1); border-color: rgba(103,232,249,.22); }
+      40% { transform: scale(1.01); border-color: rgba(34,197,94,.55); }
+      100% { transform: scale(1); border-color: rgba(103,232,249,.22); }
+    }
+
+    .stage {
+      font-size: 25px;
+      font-weight: 950;
+      margin-bottom: 7px;
+    }
+
+    .bar {
+      height: 11px;
+      background: rgba(255,255,255,.1);
+      border-radius: 99px;
+      overflow: hidden;
+      margin-top: 12px;
+    }
+
+    .fill {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg,var(--violet),var(--cyan),var(--green));
+      border-radius: 99px;
+      transition: width .45s ease;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: 12px;
+      padding: 5px 9px;
+      margin: 3px;
+      border-radius: 99px;
+      background: rgba(255,255,255,.1);
+      color: var(--muted);
+    }
+
+    .note {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+      margin-top: 10px;
+    }
+
+    .green { color: var(--green); }
+    .yellow { color: var(--yellow); }
+    .red { color: var(--red); }
+    .cyan { color: var(--cyan); }
+    .blue { color: var(--blue); }
+
+    .scenario {
+      padding: 13px;
+      border-radius: 17px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      transition: transform .18s ease, border-color .18s ease;
+    }
+
+    .scenario:hover {
+      transform: translateY(-2px);
+      border-color: rgba(103,232,249,.24);
+    }
+
+    .scenario b {
+      font-size: 15px;
+    }
+
+    .chart-box {
+      position: relative;
+      width: 100%;
+    }
+
+    canvas {
+      width: 100%;
+      height: 320px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 18px;
+      margin-top: 8px;
+      display: block;
+    }
+
+    .chart-tooltip {
+      position: absolute;
+      pointer-events: none;
+      display: none;
+      z-index: 10;
+      background: rgba(7,10,18,.92);
+      border: 1px solid rgba(103,232,249,.35);
+      color: #F7FAFC;
+      padding: 8px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 1.6;
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .legend-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      padding: 6px 9px;
+      border-radius: 999px;
+    }
+
+    .legend-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(7,10,18,.92);
+      color: #fff;
+      border: 1px solid rgba(103,232,249,.28);
+      border-radius: 16px;
+      padding: 12px 14px;
+      min-width: 220px;
+      max-width: 88vw;
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.6;
+      box-shadow: 0 20px 50px rgba(0,0,0,.38);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .22s ease, transform .22s ease;
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 22px;
+      color: rgba(255,255,255,.44);
+      font-size: 12px;
+      line-height: 1.8;
+    }
   </style>
 </head>
 
 <body>
 <div class="app">
-  <span class="badge">PWA Ready • Trader Mode • Dollar Based</span>
+
+  <div class="top-row">
+    <span class="badge">PWA Ready</span>
+    <span class="badge">v3.0</span>
+    <span class="badge">Trader Mode</span>
+    <span class="badge">Dollar Based</span>
+  </div>
+
   <h1>Trader Financial Freedom Lab</h1>
+
   <p>
-    مدل دلاری برای آزادی مالی، اهداف بزرگ، سفر سالانه و ترید بر اساس R-Multiple.
-    آزادی مالی با <b>Safe Withdrawal Rate</b> محاسبه می‌شود، رشد ترید با <b>Risk × Monthly R</b>.
+    مدل دلاری برای آزادی مالی، اهداف بزرگ، هزینه سفر سالانه و ترید بر اساس R-Multiple.
+    آزادی مالی با <b>Safe Withdrawal Rate</b> محاسبه می‌شود و رشد ترید با <b>Risk × Monthly R</b>.
   </p>
 
-  <div class="status">
+  <div class="status" id="statusBox">
     <div class="stage" id="stage">در حال محاسبه...</div>
     <div class="note" id="stageDesc"></div>
     <div class="bar"><div class="fill" id="freedomBar"></div></div>
@@ -78,47 +442,113 @@
   <div class="grid two">
     <div class="card">
       <h2>مالی شخصی</h2>
+
       <div class="row">
-        <div><label>سرمایه کل فعلی</label><input id="netWorth" type="number" value="15000"></div>
-        <div><label>نقد اضطراری فعلی</label><input id="cash" type="number" value="3000"></div>
+        <div>
+          <label>سرمایه کل فعلی، بدون حساب ترید</label>
+          <input id="netWorth" type="number" value="15000">
+        </div>
+        <div>
+          <label>نقد اضطراری فعلی</label>
+          <input id="cash" type="number" value="3000">
+        </div>
       </div>
+
       <div class="row">
-        <div><label>درآمد ماهانه غیر از ترید</label><input id="income" type="number" value="1000"></div>
-        <div><label>هزینه ماهانه پایه</label><input id="basicExp" type="number" value="500"></div>
+        <div>
+          <label>درآمد ماهانه غیر از ترید</label>
+          <input id="income" type="number" value="1000">
+        </div>
+        <div>
+          <label>هزینه ماهانه پایه</label>
+          <input id="basicExp" type="number" value="500">
+        </div>
       </div>
+
       <div class="row">
-        <div><label>هزینه ماهانه مطلوب</label><input id="desiredExp" type="number" value="750"></div>
-        <div><label>هزینه زندگی رویایی ماهانه</label><input id="dreamExp" type="number" value="2500"></div>
+        <div>
+          <label>هزینه ماهانه مطلوب</label>
+          <input id="desiredExp" type="number" value="750">
+        </div>
+        <div>
+          <label>هزینه زندگی رویایی ماهانه</label>
+          <input id="dreamExp" type="number" value="2500">
+        </div>
       </div>
+
       <div class="row">
-        <div><label>هزینه سفر سالانه</label><input id="travelAnnual" type="number" value="2000"></div>
-        <div><label>صندوق اضطراری، ماه</label><input id="emMonths" type="number" value="6"></div>
+        <div>
+          <label>هزینه سفر سالانه</label>
+          <input id="travelAnnual" type="number" value="2000">
+        </div>
+        <div>
+          <label>صندوق اضطراری، ماه</label>
+          <input id="emMonths" type="number" value="6">
+        </div>
       </div>
+
       <div class="row">
-        <div><label>سرمایه‌گذاری ماهانه غیر از ترید</label><input id="investMonthly" type="number" value="200"></div>
-        <div><label>نرخ برداشت امن، درصد</label><input id="swr" type="number" value="4" step="0.1"></div>
+        <div>
+          <label>سرمایه‌گذاری ماهانه غیر از ترید</label>
+          <input id="investMonthly" type="number" value="200">
+        </div>
+        <div>
+          <label>نرخ برداشت امن، درصد</label>
+          <input id="swr" type="number" value="4" step="0.1">
+        </div>
+      </div>
+
+      <div class="btn-row">
+        <button onclick="calc(true)">محاسبه</button>
+        <button class="secondary" onclick="resetSettings()">ریست</button>
+      </div>
+
+      <div class="note">
+        سفر سالانه به هزینه سبک زندگی اضافه می‌شود و در هدف آزادی مالی لحاظ می‌شود.
       </div>
     </div>
 
     <div class="card">
       <h2>موتور ترید</h2>
+
       <div class="row">
-        <div><label>بالانس حساب ترید</label><input id="tradingBalance" type="number" value="15000"></div>
-        <div><label>ریسک هر معامله، درصد</label><input id="riskPerTrade" type="number" value="0.5" step="0.1"></div>
+        <div>
+          <label>بالانس حساب ترید</label>
+          <input id="tradingBalance" type="number" value="15000">
+        </div>
+        <div>
+          <label>ریسک هر معامله، درصد</label>
+          <input id="riskPerTrade" type="number" value="0.5" step="0.1">
+        </div>
       </div>
 
       <div class="row">
-        <div><label>Monthly R دستی</label><input id="monthlyR" type="number" value="6" step="0.1"></div>
-        <div><label>تعداد معاملات ماهانه</label><input id="tradesPerMonth" type="number" value="20"></div>
+        <div>
+          <label>Monthly R دستی</label>
+          <input id="monthlyR" type="number" value="6" step="0.1">
+        </div>
+        <div>
+          <label>تعداد معاملات ماهانه</label>
+          <input id="tradesPerMonth" type="number" value="20">
+        </div>
       </div>
 
       <div class="row">
-        <div><label>Win Rate، درصد</label><input id="winRate" type="number" value="45" step="1"></div>
-        <div><label>میانگین برد، R</label><input id="avgWinR" type="number" value="2.2" step="0.1"></div>
+        <div>
+          <label>Win Rate، درصد</label>
+          <input id="winRate" type="number" value="45" step="1">
+        </div>
+        <div>
+          <label>میانگین برد، R</label>
+          <input id="avgWinR" type="number" value="2.2" step="0.1">
+        </div>
       </div>
 
       <div class="row">
-        <div><label>میانگین باخت، R</label><input id="avgLossR" type="number" value="1" step="0.1"></div>
+        <div>
+          <label>میانگین باخت، R</label>
+          <input id="avgLossR" type="number" value="1" step="0.1">
+        </div>
         <div>
           <label>روش محاسبه R</label>
           <select id="rMode">
@@ -129,56 +559,115 @@
       </div>
 
       <div class="row">
-        <div><label>درصد برداشت از سود ترید</label><input id="withdrawProfitPct" type="number" value="50" step="5"></div>
-        <div><label>افق شبیه‌سازی، سال</label><input id="years" type="number" value="30"></div>
+        <div>
+          <label>درصد برداشت از سود ترید</label>
+          <input id="withdrawProfitPct" type="number" value="50" step="5">
+        </div>
+        <div>
+          <label>افق شبیه‌سازی، سال</label>
+          <input id="years" type="number" value="30">
+        </div>
       </div>
 
-      <button onclick="calc()">محاسبه</button>
-      <button class="secondary" onclick="setScenario('realistic')">سناریوی تریدر منطقی</button>
-      <button class="secondary" onclick="setScenario('aggressive')">سناریوی تهاجمی</button>
+      <div class="btn-row">
+        <button class="success" onclick="setScenario('realistic')">تریدر منطقی</button>
+        <button class="secondary" onclick="setScenario('aggressive')">تهاجمی</button>
+      </div>
+
+      <div class="btn-row">
+        <button class="secondary" onclick="exportSettings()">Export</button>
+        <button class="secondary" onclick="importSettingsPrompt()">Import</button>
+      </div>
+
+      <button class="secondary" onclick="shareSummary()">Share Summary</button>
 
       <div class="note">
-        Monthly R یعنی جمع R خالص ماه. مثلا 6R با ریسک 0.5٪ یعنی حدود 3٪ رشد ماهانه قبل از برداشت.
+        مثال: Monthly R = 6R و ریسک هر معامله = 0.5٪ یعنی حدود 3٪ بازده ماهانه قبل از برداشت.
       </div>
     </div>
   </div>
 
   <div class="grid three" style="margin-top:14px">
-    <div class="metric"><div class="k">هدف آزادی مالی</div><div class="v" id="freedomTarget">$0</div><div class="s">هزینه مطلوب + سفر سالانه / SWR</div></div>
-    <div class="metric"><div class="k">زمان رسیدن با ترید</div><div class="v" id="timeToFreedom">-</div><div class="s">بعد از هزینه‌ها و برداشت‌ها</div></div>
-    <div class="metric"><div class="k">سود ماهانه ترید</div><div class="v" id="tradingProfit">$0</div><div class="s" id="tradingReturnText">-</div></div>
+    <div class="metric">
+      <div class="k">هدف آزادی مالی</div>
+      <div class="v" id="freedomTarget">$0</div>
+      <div class="s">هزینه مطلوب + سفر سالانه / SWR</div>
+    </div>
+    <div class="metric">
+      <div class="k">زمان رسیدن با ترید</div>
+      <div class="v" id="timeToFreedom">-</div>
+      <div class="s">بعد از هزینه‌ها و برداشت‌ها</div>
+    </div>
+    <div class="metric">
+      <div class="k">سود ماهانه ترید</div>
+      <div class="v" id="tradingProfit">$0</div>
+      <div class="s" id="tradingReturnText">-</div>
+    </div>
   </div>
 
   <div class="grid four" style="margin-top:14px">
-    <div class="metric"><div class="k">Monthly R موثر</div><div class="v" id="effectiveR">0R</div><div class="s">بر اساس روش انتخابی</div></div>
-    <div class="metric"><div class="k">بازده ماهانه ترید</div><div class="v" id="monthlyTradingReturn">0%</div><div class="s">Risk × Monthly R</div></div>
-    <div class="metric"><div class="k">حداقل بالانس پوشش خرج</div><div class="v" id="minBalanceExpense">$0</div><div class="s">برای پوشش هزینه ماهانه مطلوب</div></div>
-    <div class="metric"><div class="k">R لازم برای خرج ماهانه</div><div class="v" id="requiredR">0R</div><div class="s">روی بالانس فعلی ترید</div></div>
+    <div class="metric">
+      <div class="k">Monthly R موثر</div>
+      <div class="v" id="effectiveR">0R</div>
+      <div class="s">بر اساس روش انتخابی</div>
+    </div>
+    <div class="metric">
+      <div class="k">بازده ماهانه ترید</div>
+      <div class="v" id="monthlyTradingReturn">0%</div>
+      <div class="s">Risk × Monthly R</div>
+    </div>
+    <div class="metric">
+      <div class="k">حداقل بالانس پوشش خرج</div>
+      <div class="v" id="minBalanceExpense">$0</div>
+      <div class="s">برای پوشش هزینه ماهانه مطلوب + سفر</div>
+    </div>
+    <div class="metric">
+      <div class="k">R لازم برای خرج ماهانه</div>
+      <div class="v" id="requiredR">0R</div>
+      <div class="s">روی بالانس فعلی ترید</div>
+    </div>
   </div>
 
   <div class="grid two" style="margin-top:14px">
     <div class="card">
       <h2>اهداف بزرگ</h2>
+
       <div class="row">
-        <div><label>خرید خانه</label><input id="house" type="number" value="200000"></div>
-        <div><label>خرید ویلا</label><input id="villa" type="number" value="120000"></div>
+        <div>
+          <label>خرید خانه</label>
+          <input id="house" type="number" value="200000">
+        </div>
+        <div>
+          <label>خرید ویلا</label>
+          <input id="villa" type="number" value="120000">
+        </div>
       </div>
+
       <div class="row">
-        <div><label>خرید خودرو</label><input id="car" type="number" value="40000"></div>
-        <div><label>بودجه سفر سالانه هدف</label><input id="travelGoal" type="number" value="5000"></div>
+        <div>
+          <label>خرید خودرو</label>
+          <input id="car" type="number" value="40000">
+        </div>
+        <div>
+          <label>بودجه سفر سالانه هدف</label>
+          <input id="travelGoal" type="number" value="5000">
+        </div>
       </div>
+
       <div id="goals" class="note"></div>
     </div>
 
     <div class="card">
       <h2>هشدارها و تحلیل</h2>
       <div id="warnings" class="note"></div>
+
       <div style="margin-top:8px">
         <span class="pill">Risk</span>
         <span class="pill">R-Multiple</span>
         <span class="pill">SWR</span>
         <span class="pill">Travel Budget</span>
         <span class="pill">PWA</span>
+        <span class="pill">LocalStorage</span>
       </div>
     </div>
   </div>
@@ -186,11 +675,26 @@
   <div class="grid two" style="margin-top:14px">
     <div class="card">
       <h2>نمودار رشد سرمایه کل</h2>
-      <canvas id="wealthChart" width="900" height="360"></canvas>
+      <div class="chart-box">
+        <canvas id="wealthChart"></canvas>
+        <div class="chart-tooltip" id="wealthTooltip"></div>
+      </div>
+      <div class="legend" id="wealthLegend"></div>
+      <div class="note">
+        محور افقی: سال — محور عمودی: کل سرمایه دلاری شامل دارایی + حساب ترید.
+      </div>
     </div>
+
     <div class="card">
       <h2>مقایسه سناریوهای ترید</h2>
-      <canvas id="scenarioChart" width="900" height="360"></canvas>
+      <div class="chart-box">
+        <canvas id="scenarioChart"></canvas>
+        <div class="chart-tooltip" id="scenarioTooltip"></div>
+      </div>
+      <div class="legend" id="scenarioLegend"></div>
+      <div class="note">
+        مقایسه رشد سرمایه در سناریوهای مختلف Risk per Trade و Monthly R.
+      </div>
     </div>
   </div>
 
@@ -198,12 +702,21 @@
     <h2>سناریوهای سریع</h2>
     <div class="grid four" id="scenarioCards"></div>
   </div>
+
+  <div class="footer">
+    Version 3.0 • GitHub Pages PWA • اطلاعات ورودی در مرورگر خودت ذخیره می‌شود.
+    <br>
+    توصیه سرمایه‌گذاری نیست؛ ابزار برنامه‌ریزی شخصی است.
+  </div>
+
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(()=>{});
+    navigator.serviceWorker.register("./sw.js").catch(() => {});
   });
 }
 
@@ -213,233 +726,863 @@ const ids = [
   "winRate","avgWinR","avgLossR","rMode","withdrawProfitPct","years","house","villa","car","travelGoal"
 ];
 
-function $(id){return document.getElementById(id)}
-function n(id){const v=parseFloat($(id).value);return isNaN(v)?0:v}
-function money(x){
-  if(!isFinite(x))return "∞";
-  if(Math.abs(x)>=1e6)return "$"+(x/1e6).toFixed(2)+"M";
-  return "$"+Math.round(x).toLocaleString("en-US");
-}
-function pct(x){return (x*100).toFixed(1)+"%"}
-function ytext(m){
-  if(!isFinite(m))return "نمی‌رسد";
-  if(m<=0)return "همین الان";
-  const y=Math.floor(m/12), mm=Math.round(m%12);
-  return y?`${y} سال ${mm?`و ${mm} ماه`:""}`:`${mm} ماه`;
-}
-function save(){let d={};ids.forEach(id=>d[id]=$(id).value);localStorage.setItem("traderLab",JSON.stringify(d))}
-function load(){try{let d=JSON.parse(localStorage.getItem("traderLab")||"{}");ids.forEach(id=>{if(d[id]!==undefined)$(id).value=d[id]})}catch(e){}}
-
-function getEffectiveR(){
-  const mode=$("rMode").value;
-  if(mode==="manual") return n("monthlyR");
-  const wr=n("winRate")/100;
-  const expR=wr*n("avgWinR")-(1-wr)*n("avgLossR");
-  return expR*n("tradesPerMonth");
+function $(id) {
+  return document.getElementById(id);
 }
 
-function simulate(params){
+function n(id) {
+  const v = parseFloat($(id).value);
+  return isNaN(v) ? 0 : v;
+}
+
+function money(x) {
+  if (!isFinite(x)) return "∞";
+  if (Math.abs(x) >= 1e6) return "$" + (x / 1e6).toFixed(2) + "M";
+  return "$" + Math.round(x).toLocaleString("en-US");
+}
+
+function compactMoney(x) {
+  if (!isFinite(x)) return "∞";
+  const abs = Math.abs(x);
+  if (abs >= 1e9) return "$" + (x / 1e9).toFixed(1) + "B";
+  if (abs >= 1e6) return "$" + (x / 1e6).toFixed(1) + "M";
+  if (abs >= 1e3) return "$" + Math.round(x / 1e3) + "K";
+  return "$" + Math.round(x);
+}
+
+function pct(x) {
+  if (!isFinite(x)) return "-";
+  return (x * 100).toFixed(1) + "%";
+}
+
+function ytext(m) {
+  if (!isFinite(m)) return "نمی‌رسد";
+  if (m <= 0) return "همین الان";
+  const y = Math.floor(m / 12);
+  const mm = Math.round(m % 12);
+  return y ? `${y} سال ${mm ? `و ${mm} ماه` : ""}` : `${mm} ماه`;
+}
+
+function toast(msg) {
+  const el = $("toast");
+  el.innerHTML = msg;
+  el.classList.add("show");
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
+}
+
+function flashStatus() {
+  const s = $("statusBox");
+  s.classList.remove("flash");
+  void s.offsetWidth;
+  s.classList.add("flash");
+}
+
+function bumpInputs() {
+  ids.forEach(id => {
+    const el = $(id);
+    if (!el) return;
+    el.classList.remove("bump");
+    void el.offsetWidth;
+    el.classList.add("bump");
+  });
+}
+
+function save() {
+  const d = {};
+  ids.forEach(id => {
+    const el = $(id);
+    if (el) d[id] = el.value;
+  });
+  localStorage.setItem("traderLab_v3", JSON.stringify(d));
+}
+
+function load() {
+  try {
+    const raw = localStorage.getItem("traderLab_v3") || localStorage.getItem("traderLab") || "{}";
+    const d = JSON.parse(raw);
+    ids.forEach(id => {
+      if (d[id] !== undefined && $(id)) $(id).value = d[id];
+    });
+  } catch(e) {}
+}
+
+function resetSettings() {
+  if (!confirm("همه تنظیمات ذخیره‌شده پاک شود؟")) return;
+  localStorage.removeItem("traderLab_v3");
+  localStorage.removeItem("traderLab");
+  toast("تنظیمات پاک شد. صفحه را رفرش کن.");
+}
+
+function exportSettings() {
+  const data = {};
+  ids.forEach(id => {
+    const el = $(id);
+    if (el) data[id] = el.value;
+  });
+
+  const json = JSON.stringify(data, null, 2);
+
+  navigator.clipboard.writeText(json)
+    .then(() => toast("تنظیمات کپی شد."))
+    .catch(() => {
+      prompt("Copy your settings:", json);
+    });
+}
+
+function importSettingsPrompt() {
+  const json = prompt("Paste exported settings JSON:");
+  if (!json) return;
+
+  try {
+    const data = JSON.parse(json);
+    Object.keys(data).forEach(id => {
+      const el = $(id);
+      if (el) el.value = data[id];
+    });
+    save();
+    calc(true);
+    toast("تنظیمات Import شد.");
+  } catch(e) {
+    alert("JSON نامعتبر است.");
+  }
+}
+
+function shareSummary() {
+  const summary = `
+Trader Financial Freedom Lab
+
+Freedom Target: ${$("freedomTarget").innerText}
+Time to Freedom: ${$("timeToFreedom").innerText}
+Monthly Trading Profit: ${$("tradingProfit").innerText}
+Effective Monthly R: ${$("effectiveR").innerText}
+Monthly Trading Return: ${$("monthlyTradingReturn").innerText}
+
+${location.href}
+  `.trim();
+
+  if (navigator.share) {
+    navigator.share({
+      title: "Trader Financial Freedom Lab",
+      text: summary,
+      url: location.href
+    });
+  } else {
+    navigator.clipboard.writeText(summary)
+      .then(() => toast("Summary کپی شد."))
+      .catch(() => prompt("Copy summary:", summary));
+  }
+}
+
+function getEffectiveR() {
+  const mode = $("rMode").value;
+
+  if (mode === "manual") return n("monthlyR");
+
+  const wr = n("winRate") / 100;
+  const expR = wr * n("avgWinR") - (1 - wr) * n("avgLossR");
+  return expR * n("tradesPerMonth");
+}
+
+function simulate(params) {
   let {
-    netWorth, tradingBalance, investMonthly, income, desiredMonthlyTotal,
-    annualReturn, monthlyTradingReturn, withdrawPct, months
+    netWorth,
+    tradingBalance,
+    investMonthly,
+    income,
+    desiredMonthlyTotal,
+    annualReturn,
+    monthlyTradingReturn,
+    withdrawPct,
+    months
   } = params;
 
-  let arr=[];
-  for(let m=0;m<=months;m++){
-    const tradingProfit=tradingBalance*monthlyTradingReturn;
-    const withdraw=Math.max(0,tradingProfit*withdrawPct);
-    const reinvest=tradingProfit-withdraw;
+  const arr = [];
 
-    const outsideSurplus=income - desiredMonthlyTotal;
-    const addToWealth=investMonthly + Math.max(0,outsideSurplus) + withdraw;
+  for (let m = 0; m <= months; m++) {
+    const tradingProfit = tradingBalance * monthlyTradingReturn;
+    const withdraw = Math.max(0, tradingProfit * withdrawPct);
+    const reinvest = tradingProfit - withdraw;
 
-    netWorth = netWorth*(1+annualReturn/12) + addToWealth;
-    tradingBalance = Math.max(0,tradingBalance + reinvest);
+    const outsideSurplus = income - desiredMonthlyTotal;
+    const addToWealth = investMonthly + Math.max(0, outsideSurplus) + withdraw;
 
-    arr.push({m,netWorth,tradingBalance,total:netWorth+tradingBalance,profit:tradingProfit});
+    netWorth = netWorth * (1 + annualReturn / 12) + addToWealth;
+    tradingBalance = Math.max(0, tradingBalance + reinvest);
+
+    arr.push({
+      m,
+      netWorth,
+      tradingBalance,
+      total: netWorth + tradingBalance,
+      profit: tradingProfit
+    });
   }
+
   return arr;
 }
 
-function monthsToTarget(arr,target){
-  for(const p of arr){ if(p.total>=target) return p.m; }
+function monthsToTarget(arr, target) {
+  for (const p of arr) {
+    if (p.total >= target) return p.m;
+  }
   return Infinity;
 }
 
-function calc(){
-  const netWorth=n("netWorth"), cash=n("cash"), income=n("income");
-  const basicExp=n("basicExp"), desiredExp=n("desiredExp"), dreamExp=n("dreamExp");
-  const travelAnnual=n("travelAnnual"), travelMonthly=travelAnnual/12;
-  const desiredMonthlyTotal=desiredExp+travelMonthly;
-  const investMonthly=n("investMonthly");
-  const swr=n("swr")/100;
-  const tradingBalance=n("tradingBalance");
-  const risk=n("riskPerTrade")/100;
-  const effR=getEffectiveR();
-  const monthlyTradingReturn=effR*risk;
-  const withdrawPct=n("withdrawProfitPct")/100;
-  const years=n("years");
-  const months=years*12;
+function calc(withReaction = false) {
+  const netWorth = n("netWorth");
+  const cash = n("cash");
+  const income = n("income");
+  const basicExp = n("basicExp");
+  const desiredExp = n("desiredExp");
+  const dreamExp = n("dreamExp");
+  const travelAnnual = n("travelAnnual");
+  const travelMonthly = travelAnnual / 12;
+  const desiredMonthlyTotal = desiredExp + travelMonthly;
+  const investMonthly = n("investMonthly");
+  const swr = n("swr") / 100;
+  const tradingBalance = n("tradingBalance");
+  const risk = n("riskPerTrade") / 100;
+  const effR = getEffectiveR();
+  const monthlyTradingReturn = effR * risk;
+  const withdrawPct = n("withdrawProfitPct") / 100;
+  const years = Math.max(1, n("years"));
+  const months = years * 12;
 
-  const annualDesired=desiredExp*12+travelAnnual;
-  const annualBasic=basicExp*12+travelAnnual;
-  const freedomTarget=annualDesired/swr;
-  const securityTarget=annualBasic/swr;
-  const dreamTarget=(dreamExp*12+travelAnnual)/swr;
-  const emergencyTarget=basicExp*n("emMonths");
+  const annualDesired = desiredExp * 12 + travelAnnual;
+  const annualBasic = basicExp * 12 + travelAnnual;
+  const freedomTarget = swr > 0 ? annualDesired / swr : Infinity;
+  const securityTarget = swr > 0 ? annualBasic / swr : Infinity;
+  const dreamTarget = swr > 0 ? (dreamExp * 12 + travelAnnual) / swr : Infinity;
+  const emergencyTarget = basicExp * n("emMonths");
 
-  const tradingProfit=tradingBalance*monthlyTradingReturn;
-  const requiredR = risk>0 && tradingBalance>0 ? desiredMonthlyTotal/(tradingBalance*risk) : Infinity;
-  const minBalanceExpense = monthlyTradingReturn>0 ? desiredMonthlyTotal/monthlyTradingReturn : Infinity;
+  const tradingProfit = tradingBalance * monthlyTradingReturn;
+  const requiredR = risk > 0 && tradingBalance > 0 ? desiredMonthlyTotal / (tradingBalance * risk) : Infinity;
+  const minBalanceExpense = monthlyTradingReturn > 0 ? desiredMonthlyTotal / monthlyTradingReturn : Infinity;
 
-  const arr=simulate({
-    netWorth,tradingBalance,investMonthly,income,desiredMonthlyTotal,
-    annualReturn:.04,monthlyTradingReturn,withdrawPct,months
+  const arr = simulate({
+    netWorth,
+    tradingBalance,
+    investMonthly,
+    income,
+    desiredMonthlyTotal,
+    annualReturn: .04,
+    monthlyTradingReturn,
+    withdrawPct,
+    months
   });
 
-  const mtf=monthsToTarget(arr,freedomTarget);
-  const progress=Math.min((netWorth+tradingBalance)/freedomTarget,1);
+  const mtf = monthsToTarget(arr, freedomTarget);
+  const progress = freedomTarget > 0 ? Math.min((netWorth + tradingBalance) / freedomTarget, 1) : 0;
 
-  $("freedomTarget").innerText=money(freedomTarget);
-  $("timeToFreedom").innerText=ytext(mtf);
-  $("tradingProfit").innerText=money(tradingProfit);
-  $("tradingReturnText").innerText=`ماهانه ${pct(monthlyTradingReturn)} قبل از برداشت`;
-  $("effectiveR").innerText=effR.toFixed(1)+"R";
-  $("monthlyTradingReturn").innerText=pct(monthlyTradingReturn);
-  $("minBalanceExpense").innerText=money(minBalanceExpense);
-  $("requiredR").innerText=isFinite(requiredR)?requiredR.toFixed(1)+"R":"∞";
+  $("freedomTarget").innerText = money(freedomTarget);
+  $("timeToFreedom").innerText = ytext(mtf);
+  $("tradingProfit").innerText = money(tradingProfit);
+  $("tradingReturnText").innerText = `ماهانه ${pct(monthlyTradingReturn)} قبل از برداشت`;
+  $("effectiveR").innerText = effR.toFixed(1) + "R";
+  $("monthlyTradingReturn").innerText = pct(monthlyTradingReturn);
+  $("minBalanceExpense").innerText = money(minBalanceExpense);
+  $("requiredR").innerText = isFinite(requiredR) ? requiredR.toFixed(1) + "R" : "∞";
 
-  $("freedomBar").style.width=Math.round(progress*100)+"%";
-  $("progressText").innerText=`${Math.round(progress*100)}٪ مسیر آزادی مالی. فاصله: ${money(Math.max(0,freedomTarget-(netWorth+tradingBalance)))}`;
+  $("freedomBar").style.width = Math.round(progress * 100) + "%";
+  $("progressText").innerText =
+    `${Math.round(progress * 100)}٪ مسیر آزادی مالی. فاصله: ${money(Math.max(0, freedomTarget - (netWorth + tradingBalance)))}`;
 
-  let stage="ثبات مالی", desc="";
-  const total=netWorth+tradingBalance;
-  if(cash<emergencyTarget){stage="ساخت صندوق اضطراری";desc=`اولویت: تکمیل ${money(emergencyTarget)} نقد اضطراری.`}
-  else if(total<securityTarget){stage="ثبات مالی";desc="در مسیر هستی؛ هدف بعدی امنیت مالی است."}
-  else if(total<freedomTarget){stage="امنیت مالی";desc="هزینه پایه تا حد زیادی قابل پوشش است؛ هدف بعدی آزادی مالی کامل."}
-  else if(total<dreamTarget){stage="آزادی مالی";desc="سبک زندگی مطلوبت با برداشت امن قابل پوشش است."}
-  else{stage="ثروت فراوان";desc="حتی سبک زندگی رویایی قابل پشتیبانی است."}
-  $("stage").innerText=stage;$("stageDesc").innerText=desc;
+  let stage = "ثبات مالی";
+  let desc = "";
 
-  const goals=[
-    ["خانه",n("house")],["ویلا",n("villa")],["خودرو",n("car")],["سفر سالانه هدف",n("travelGoal")]
+  const total = netWorth + tradingBalance;
+
+  if (cash < emergencyTarget) {
+    stage = "ساخت صندوق اضطراری";
+    desc = `اولویت: تکمیل ${money(emergencyTarget)} نقد اضطراری.`;
+  } else if (total < securityTarget) {
+    stage = "ثبات مالی";
+    desc = "در مسیر هستی؛ هدف بعدی امنیت مالی است.";
+  } else if (total < freedomTarget) {
+    stage = "امنیت مالی";
+    desc = "هزینه پایه تا حد زیادی قابل پوشش است؛ هدف بعدی آزادی مالی کامل.";
+  } else if (total < dreamTarget) {
+    stage = "آزادی مالی";
+    desc = "سبک زندگی مطلوبت با برداشت امن قابل پوشش است.";
+  } else {
+    stage = "ثروت فراوان";
+    desc = "حتی سبک زندگی رویایی قابل پشتیبانی است.";
+  }
+
+  $("stage").innerText = stage;
+  $("stageDesc").innerText = desc;
+
+  const goals = [
+    ["خانه", n("house")],
+    ["ویلا", n("villa")],
+    ["خودرو", n("car")],
+    ["سفر سالانه هدف", n("travelGoal")]
   ];
-  $("goals").innerHTML=goals.map(g=>{
-    const target=g[1];
-    const m=monthsToTarget(arr,target);
+
+  $("goals").innerHTML = goals.map(g => {
+    const target = g[1];
+    const m = monthsToTarget(arr, target);
     return `• ${g[0]}: <b>${money(target)}</b> — با مدل فعلی: <b class="cyan">${ytext(m)}</b><br>`;
   }).join("");
 
-  let w=[];
-  if(risk>.01) w.push("ریسک بالای ۱٪ برای هر ترید فشار روانی و Drawdown را زیاد می‌کند.");
-  if(monthlyTradingReturn>.08) w.push("بازده ماهانه بالای ۸٪ را برای برنامه‌ریزی بلندمدت محافظه‌کارانه فرض نکن.");
-  if(effR<0) w.push("Expectancy منفی است؛ مدل ترید در بلندمدت سرمایه را می‌خورد.");
-  if(withdrawPct>0.7) w.push("برداشت بیش از ۷۰٪ سود، رشد حساب ترید را کند می‌کند.");
-  if(cash<emergencyTarget) w.push("قبل از افزایش ریسک، صندوق اضطراری را کامل کن.");
-  if(!w.length) w.push("فرضیات فعلی متعادل‌اند؛ حالا سناریوهای بدبینانه را هم تست کن.");
-  $("warnings").innerHTML=w.map(x=>"• "+x).join("<br>");
+  const w = [];
 
-  drawLine("wealthChart",arr.map(x=>x.total),[
-    {v:securityTarget,c:"#60A5FA",t:"Security"},
-    {v:freedomTarget,c:"#67E8F9",t:"Freedom"},
-    {v:dreamTarget,c:"#FACC15",t:"Dream"}
-  ]);
+  if (risk > .01) w.push("ریسک بالای ۱٪ برای هر ترید فشار روانی و Drawdown را زیاد می‌کند.");
+  if (monthlyTradingReturn > .08) w.push("بازده ماهانه بالای ۸٪ را برای برنامه‌ریزی بلندمدت محافظه‌کارانه فرض نکن.");
+  if (effR < 0) w.push("Expectancy منفی است؛ مدل ترید در بلندمدت سرمایه را کاهش می‌دهد.");
+  if (withdrawPct > .7) w.push("برداشت بیش از ۷۰٪ سود، رشد حساب ترید را کند می‌کند.");
+  if (cash < emergencyTarget) w.push("قبل از افزایش ریسک، صندوق اضطراری را کامل کن.");
+  if (swr > .04) w.push("نرخ برداشت امن بالای ۴٪ برای افق بلندمدت تهاجمی‌تر است.");
+  if (!w.length) w.push("فرضیات فعلی متعادل‌اند؛ سناریوهای بدبینانه را هم تست کن.");
 
-  drawScenarioChart(freedomTarget);
+  $("warnings").innerHTML = w.map(x => "• " + x).join("<br>");
+
+  drawSingleSeriesChart({
+    canvasId: "wealthChart",
+    tooltipId: "wealthTooltip",
+    legendId: "wealthLegend",
+    data: arr.map(x => x.total),
+    years,
+    label: "Total Wealth",
+    targets: [
+      { v: securityTarget, c: "#60A5FA", t: "Security" },
+      { v: freedomTarget, c: "#67E8F9", t: "Freedom" },
+      { v: dreamTarget, c: "#FACC15", t: "Dream" }
+    ]
+  });
+
+  drawScenarioChartV2(freedomTarget, years);
   renderScenarioCards(freedomTarget);
+
   save();
+
+  if (withReaction) {
+    flashStatus();
+    toast("محاسبه شد و اطلاعات ذخیره شد.");
+  }
 }
 
-function drawLine(id,data,targets=[]){
-  const c=$(id),ctx=c.getContext("2d"),w=c.width,h=c.height,p=42;
-  ctx.clearRect(0,0,w,h);
-  const max=Math.max(...data,...targets.map(x=>x.v))*1.08;
-  const x=i=>p+i/(data.length-1)*(w-2*p);
-  const y=v=>h-p-v/max*(h-2*p);
+function scenarioData(riskPct, R) {
+  const netWorth = n("netWorth");
+  const tradingBalance = n("tradingBalance");
+  const desiredMonthlyTotal = n("desiredExp") + n("travelAnnual") / 12;
 
-  ctx.strokeStyle="rgba(255,255,255,.12)";ctx.lineWidth=1;
-  for(let i=0;i<=4;i++){let yy=p+i/4*(h-2*p);ctx.beginPath();ctx.moveTo(p,yy);ctx.lineTo(w-p,yy);ctx.stroke();}
-  targets.forEach(t=>{
-    if(!isFinite(t.v))return;
-    ctx.setLineDash([8,6]);ctx.strokeStyle=t.c;ctx.beginPath();ctx.moveTo(p,y(t.v));ctx.lineTo(w-p,y(t.v));ctx.stroke();ctx.setLineDash([]);
-    ctx.fillStyle=t.c;ctx.font="20px -apple-system";ctx.fillText(t.t+" "+money(t.v),p+8,y(t.v)-7);
+  return simulate({
+    netWorth,
+    tradingBalance,
+    investMonthly: n("investMonthly"),
+    income: n("income"),
+    desiredMonthlyTotal,
+    annualReturn: .04,
+    monthlyTradingReturn: (riskPct / 100) * R,
+    withdrawPct: n("withdrawProfitPct") / 100,
+    months: n("years") * 12
   });
-  const g=ctx.createLinearGradient(0,0,w,0);g.addColorStop(0,"#8B5CF6");g.addColorStop(.5,"#67E8F9");g.addColorStop(1,"#22C55E");
-  ctx.strokeStyle=g;ctx.lineWidth=5;ctx.beginPath();
-  data.forEach((v,i)=>i?ctx.lineTo(x(i),y(v)):ctx.moveTo(x(i),y(v)));ctx.stroke();
-  ctx.fillStyle="rgba(255,255,255,.7)";ctx.font="19px -apple-system";ctx.fillText(money(max),10,p);ctx.fillText(money(data[data.length-1]),w-180,h-15);
 }
 
-function scenarioData(riskPct,R){
-  const netWorth=n("netWorth"), tradingBalance=n("tradingBalance");
-  const desiredMonthlyTotal=n("desiredExp")+n("travelAnnual")/12;
-  const arr=simulate({
-    netWorth,tradingBalance,investMonthly:n("investMonthly"),income:n("income"),
-    desiredMonthlyTotal,annualReturn:.04,monthlyTradingReturn:(riskPct/100)*R,
-    withdrawPct:n("withdrawProfitPct")/100,months:n("years")*12
-  });
-  return arr;
+function setScenario(type) {
+  if (type === "realistic") {
+    $("riskPerTrade").value = .5;
+    $("monthlyR").value = 6;
+    $("winRate").value = 45;
+    $("avgWinR").value = 2.2;
+    $("avgLossR").value = 1;
+    $("tradesPerMonth").value = 20;
+    $("withdrawProfitPct").value = 50;
+    toast("سناریوی منطقی اعمال شد.");
+  } else {
+    $("riskPerTrade").value = 1;
+    $("monthlyR").value = 8;
+    $("winRate").value = 48;
+    $("avgWinR").value = 2.3;
+    $("avgLossR").value = 1;
+    $("tradesPerMonth").value = 22;
+    $("withdrawProfitPct").value = 40;
+    toast("سناریوی تهاجمی اعمال شد.");
+  }
+
+  bumpInputs();
+  calc(true);
 }
 
-function drawScenarioChart(freedomTarget){
-  const scenarios=[
-    ["Conservative",.25,3,"#60A5FA"],
-    ["Realistic",.5,6,"#67E8F9"],
-    ["Aggressive",1,8,"#22C55E"],
-    ["High Risk",2,10,"#FB7185"]
+function renderScenarioCards(freedomTarget) {
+  const scenarios = [
+    ["محافظه‌کارانه", .25, 3],
+    ["منطقی", .5, 6],
+    ["تهاجمی", 1, 8],
+    ["خیلی پرریسک", 2, 10]
   ];
-  const c=$("scenarioChart"),ctx=c.getContext("2d"),w=c.width,h=c.height,p=42;
-  ctx.clearRect(0,0,w,h);
-  const series=scenarios.map(s=>({s,data:scenarioData(s[1],s[2]).map(x=>x.total)}));
-  const max=Math.max(...series.flatMap(a=>a.data),freedomTarget)*1.08;
-  const len=series[0].data.length;
-  const x=i=>p+i/(len-1)*(w-2*p), y=v=>h-p-v/max*(h-2*p);
 
-  ctx.strokeStyle="rgba(255,255,255,.12)";
-  for(let i=0;i<=4;i++){let yy=p+i/4*(h-2*p);ctx.beginPath();ctx.moveTo(p,yy);ctx.lineTo(w-p,yy);ctx.stroke();}
-  series.forEach(obj=>{
-    ctx.strokeStyle=obj.s[3];ctx.lineWidth=4;ctx.beginPath();
-    obj.data.forEach((v,i)=>i?ctx.lineTo(x(i),y(v)):ctx.moveTo(x(i),y(v)));ctx.stroke();
-  });
-  ctx.fillStyle="rgba(255,255,255,.75)";ctx.font="19px -apple-system";
-  scenarios.forEach((s,i)=>{ctx.fillStyle=s[3];ctx.fillText(`${s[0]} ${s[1]}%/${s[2]}R`,p,24+i*24)});
-}
+  $("scenarioCards").innerHTML = scenarios.map(s => {
+    const arr = scenarioData(s[1], s[2]);
+    const m = monthsToTarget(arr, freedomTarget);
+    const ret = (s[1] / 100) * s[2];
 
-function renderScenarioCards(freedomTarget){
-  const scenarios=[
-    ["محافظه‌کارانه",.25,3],
-    ["منطقی",.5,6],
-    ["تهاجمی",1,8],
-    ["خیلی پرریسک",2,10]
-  ];
-  $("scenarioCards").innerHTML=scenarios.map(s=>{
-    const arr=scenarioData(s[1],s[2]);
-    const m=monthsToTarget(arr,freedomTarget);
-    const ret=(s[1]/100)*s[2];
-    return `<div class="scenario">
-      <b>${s[0]}</b>
-      <div class="note">
-        ریسک: ${s[1]}٪<br>
-        Monthly R: ${s[2]}R<br>
-        بازده ماهانه: ${pct(ret)}<br>
-        آزادی مالی: <span class="cyan">${ytext(m)}</span>
+    return `
+      <div class="scenario">
+        <b>${s[0]}</b>
+        <div class="note">
+          ریسک: ${s[1]}٪<br>
+          Monthly R: ${s[2]}R<br>
+          بازده ماهانه: ${pct(ret)}<br>
+          آزادی مالی: <span class="cyan">${ytext(m)}</span>
+        </div>
       </div>
-    </div>`;
+    `;
   }).join("");
 }
 
-function setScenario(type){
-  if(type==="realistic"){
-    $("riskPerTrade").value=.5;$("monthlyR").value=6;$("winRate").value=45;$("avgWinR").value=2.2;$("avgLossR").value=1;$("tradesPerMonth").value=20;$("withdrawProfitPct").value=50;
-  } else {
-    $("riskPerTrade").value=1;$("monthlyR").value=8;$("winRate").value=48;$("avgWinR").value=2.3;$("avgLossR").value=1;$("tradesPerMonth").value=22;$("withdrawProfitPct").value=40;
-  }
-  calc();
+/* Charts */
+
+function setupCanvas(canvas) {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+
+  canvas.width = Math.floor(rect.width * dpr);
+  canvas.height = Math.floor(rect.height * dpr);
+
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+  return {
+    ctx,
+    width: rect.width,
+    height: rect.height
+  };
 }
 
-ids.forEach(id=>window.addEventListener("load",()=>{$(id).addEventListener("input",calc);$(id).addEventListener("change",calc)}));
+function niceMax(value) {
+  if (!isFinite(value) || value <= 0) return 1000;
+
+  const exponent = Math.floor(Math.log10(value));
+  const base = Math.pow(10, exponent);
+  const fraction = value / base;
+
+  let niceFraction;
+  if (fraction <= 1) niceFraction = 1;
+  else if (fraction <= 2) niceFraction = 2;
+  else if (fraction <= 5) niceFraction = 5;
+  else niceFraction = 10;
+
+  return niceFraction * base;
+}
+
+function drawAxes(ctx, dims, maxY, years) {
+  const { left, right, top, bottom, chartW, chartH } = dims;
+
+  ctx.save();
+
+  ctx.strokeStyle = "rgba(255,255,255,.12)";
+  ctx.lineWidth = 1;
+  ctx.font = "12px -apple-system, BlinkMacSystemFont, sans-serif";
+  ctx.textBaseline = "middle";
+
+  const yTicks = 5;
+
+  for (let i = 0; i <= yTicks; i++) {
+    const value = maxY * (i / yTicks);
+    const y = bottom - (value / maxY) * chartH;
+
+    ctx.beginPath();
+    ctx.moveTo(left, y);
+    ctx.lineTo(right, y);
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(255,255,255,.62)";
+    ctx.textAlign = "right";
+    ctx.fillText(compactMoney(value), left - 10, y);
+  }
+
+  const xTicks = Math.min(6, Math.max(2, Math.round(years)));
+
+  for (let i = 0; i <= xTicks; i++) {
+    const year = years * (i / xTicks);
+    const x = left + (i / xTicks) * chartW;
+
+    ctx.strokeStyle = "rgba(255,255,255,.075)";
+    ctx.beginPath();
+    ctx.moveTo(x, top);
+    ctx.lineTo(x, bottom);
+    ctx.stroke();
+
+    ctx.fillStyle = "rgba(255,255,255,.62)";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "top";
+    ctx.fillText(Math.round(year) + "y", x, bottom + 14);
+  }
+
+  ctx.strokeStyle = "rgba(255,255,255,.22)";
+  ctx.lineWidth = 1.2;
+
+  ctx.beginPath();
+  ctx.moveTo(left, top);
+  ctx.lineTo(left, bottom);
+  ctx.lineTo(right, bottom);
+  ctx.stroke();
+
+  ctx.fillStyle = "rgba(255,255,255,.45)";
+  ctx.font = "11px -apple-system, BlinkMacSystemFont, sans-serif";
+
+  ctx.textAlign = "left";
+  ctx.textBaseline = "top";
+  ctx.fillText("Years", right - 34, bottom + 32);
+
+  ctx.save();
+  ctx.translate(12, top + 60);
+  ctx.rotate(-Math.PI / 2);
+  ctx.textAlign = "center";
+  ctx.fillText("Portfolio Value USD", 0, 0);
+  ctx.restore();
+
+  ctx.restore();
+}
+
+function drawTargetLines(ctx, dims, maxY, targets) {
+  const { left, right, bottom, chartH } = dims;
+
+  targets.forEach(t => {
+    if (!isFinite(t.v) || t.v <= 0 || t.v > maxY) return;
+
+    const y = bottom - (t.v / maxY) * chartH;
+
+    ctx.save();
+    ctx.strokeStyle = t.c;
+    ctx.lineWidth = 1.4;
+    ctx.setLineDash([7, 6]);
+
+    ctx.beginPath();
+    ctx.moveTo(left, y);
+    ctx.lineTo(right, y);
+    ctx.stroke();
+
+    ctx.setLineDash([]);
+    ctx.fillStyle = t.c;
+    ctx.font = "12px -apple-system, BlinkMacSystemFont, sans-serif";
+    ctx.textAlign = "left";
+    ctx.textBaseline = "bottom";
+    ctx.fillText(`${t.t} ${compactMoney(t.v)}`, left + 8, y - 5);
+
+    ctx.restore();
+  });
+}
+
+function drawSingleSeriesChart({
+  canvasId,
+  tooltipId,
+  legendId,
+  data,
+  targets = [],
+  years,
+  label = "Total Wealth",
+  colorStart = "#8B5CF6",
+  colorMid = "#67E8F9",
+  colorEnd = "#22C55E"
+}) {
+  const canvas = $(canvasId);
+  const tooltip = $(tooltipId);
+  const legend = $(legendId);
+
+  const { ctx, width, height } = setupCanvas(canvas);
+
+  const left = 72;
+  const right = width - 20;
+  const top = 28;
+  const bottom = height - 54;
+  const chartW = right - left;
+  const chartH = bottom - top;
+
+  const rawMax = Math.max(
+    ...data,
+    ...targets.map(t => t.v).filter(v => isFinite(v))
+  );
+
+  const maxY = niceMax(rawMax * 1.08);
+  const dims = { width, height, left, right, top, bottom, chartW, chartH };
+
+  ctx.clearRect(0, 0, width, height);
+
+  drawAxes(ctx, dims, maxY, years);
+  drawTargetLines(ctx, dims, maxY, targets);
+
+  const xFor = i => left + (i / (data.length - 1)) * chartW;
+  const yFor = v => bottom - (v / maxY) * chartH;
+
+  const grad = ctx.createLinearGradient(left, 0, right, 0);
+  grad.addColorStop(0, colorStart);
+  grad.addColorStop(.55, colorMid);
+  grad.addColorStop(1, colorEnd);
+
+  ctx.save();
+  ctx.beginPath();
+
+  data.forEach((v, i) => {
+    const x = xFor(i);
+    const y = yFor(v);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+
+  ctx.lineTo(right, bottom);
+  ctx.lineTo(left, bottom);
+  ctx.closePath();
+
+  const area = ctx.createLinearGradient(0, top, 0, bottom);
+  area.addColorStop(0, "rgba(103,232,249,.18)");
+  area.addColorStop(1, "rgba(103,232,249,0)");
+  ctx.fillStyle = area;
+  ctx.fill();
+  ctx.restore();
+
+  ctx.save();
+  ctx.strokeStyle = grad;
+  ctx.lineWidth = 4;
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  ctx.beginPath();
+
+  data.forEach((v, i) => {
+    const x = xFor(i);
+    const y = yFor(v);
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
+  });
+
+  ctx.stroke();
+  ctx.restore();
+
+  const lastValue = data[data.length - 1];
+  const lastX = xFor(data.length - 1);
+  const lastY = yFor(lastValue);
+
+  ctx.save();
+  ctx.fillStyle = colorEnd;
+  ctx.beginPath();
+  ctx.arc(lastX, lastY, 5, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.fillStyle = "rgba(255,255,255,.86)";
+  ctx.font = "12px -apple-system, BlinkMacSystemFont, sans-serif";
+  ctx.textAlign = "right";
+  ctx.textBaseline = "bottom";
+  ctx.fillText(compactMoney(lastValue), lastX - 8, lastY - 8);
+  ctx.restore();
+
+  if (legend) {
+    legend.innerHTML = `
+      <div class="legend-item">
+        <span class="legend-dot" style="background:${colorMid}"></span>
+        ${label}: ${compactMoney(lastValue)}
+      </div>
+      ${targets.map(t => `
+        <div class="legend-item">
+          <span class="legend-dot" style="background:${t.c}"></span>
+          ${t.t}: ${compactMoney(t.v)}
+        </div>
+      `).join("")}
+    `;
+  }
+
+  function handlePointer(evt) {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+    const x = clientX - rect.left;
+
+    if (x < left || x > right) {
+      tooltip.style.display = "none";
+      return;
+    }
+
+    const ratio = (x - left) / chartW;
+    const idx = Math.max(0, Math.min(data.length - 1, Math.round(ratio * (data.length - 1))));
+    const value = data[idx];
+    const year = idx / 12;
+
+    tooltip.style.display = "block";
+    tooltip.style.left = Math.min(Math.max(x + 12, 8), width - 165) + "px";
+    tooltip.style.top = "42px";
+    tooltip.innerHTML = `
+      <b>${year.toFixed(1)} سال</b><br>
+      ${label}: <b>${money(value)}</b>
+    `;
+  }
+
+  canvas.onmousemove = handlePointer;
+  canvas.ontouchstart = handlePointer;
+  canvas.ontouchmove = evt => {
+    evt.preventDefault();
+    handlePointer(evt);
+  };
+  canvas.onmouseleave = () => {
+    tooltip.style.display = "none";
+  };
+}
+
+function drawMultiSeriesChart({
+  canvasId,
+  tooltipId,
+  legendId,
+  series,
+  targets = [],
+  years
+}) {
+  const canvas = $(canvasId);
+  const tooltip = $(tooltipId);
+  const legend = $(legendId);
+
+  const { ctx, width, height } = setupCanvas(canvas);
+
+  const left = 72;
+  const right = width - 20;
+  const top = 28;
+  const bottom = height - 54;
+  const chartW = right - left;
+  const chartH = bottom - top;
+
+  const allValues = series.flatMap(s => s.data);
+  const rawMax = Math.max(...allValues, ...targets.map(t => t.v).filter(v => isFinite(v)));
+  const maxY = niceMax(rawMax * 1.08);
+  const dims = { width, height, left, right, top, bottom, chartW, chartH };
+
+  ctx.clearRect(0, 0, width, height);
+
+  drawAxes(ctx, dims, maxY, years);
+  drawTargetLines(ctx, dims, maxY, targets);
+
+  const len = series[0]?.data.length || 1;
+  const xFor = i => left + (i / (len - 1)) * chartW;
+  const yFor = v => bottom - (v / maxY) * chartH;
+
+  series.forEach(s => {
+    ctx.save();
+    ctx.strokeStyle = s.color;
+    ctx.lineWidth = 3.2;
+    ctx.lineJoin = "round";
+    ctx.lineCap = "round";
+    ctx.beginPath();
+
+    s.data.forEach((v, i) => {
+      const x = xFor(i);
+      const y = yFor(v);
+      if (i === 0) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    });
+
+    ctx.stroke();
+
+    const last = s.data[s.data.length - 1];
+    const lx = xFor(s.data.length - 1);
+    const ly = yFor(last);
+
+    ctx.fillStyle = s.color;
+    ctx.beginPath();
+    ctx.arc(lx, ly, 4, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.restore();
+  });
+
+  if (legend) {
+    legend.innerHTML = series.map(s => {
+      const last = s.data[s.data.length - 1];
+      return `
+        <div class="legend-item">
+          <span class="legend-dot" style="background:${s.color}"></span>
+          ${s.name}: ${compactMoney(last)}
+        </div>
+      `;
+    }).join("");
+  }
+
+  function handlePointer(evt) {
+    const rect = canvas.getBoundingClientRect();
+    const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
+    const x = clientX - rect.left;
+
+    if (x < left || x > right) {
+      tooltip.style.display = "none";
+      return;
+    }
+
+    const ratio = (x - left) / chartW;
+    const idx = Math.max(0, Math.min(len - 1, Math.round(ratio * (len - 1))));
+    const year = idx / 12;
+
+    tooltip.style.display = "block";
+    tooltip.style.left = Math.min(Math.max(x + 12, 8), width - 205) + "px";
+    tooltip.style.top = "42px";
+    tooltip.innerHTML = `
+      <b>${year.toFixed(1)} سال</b><br>
+      ${series.map(s => `
+        <span style="color:${s.color}">●</span>
+        ${s.name}: <b>${money(s.data[idx])}</b>
+      `).join("<br>")}
+    `;
+  }
+
+  canvas.onmousemove = handlePointer;
+  canvas.ontouchstart = handlePointer;
+  canvas.ontouchmove = evt => {
+    evt.preventDefault();
+    handlePointer(evt);
+  };
+  canvas.onmouseleave = () => {
+    tooltip.style.display = "none";
+  };
+}
+
+function drawScenarioChartV2(freedomTarget, years) {
+  const scenarios = [
+    { name: "Conservative 0.25% / 3R", risk: .25, R: 3, color: "#60A5FA" },
+    { name: "Realistic 0.5% / 6R", risk: .5, R: 6, color: "#67E8F9" },
+    { name: "Aggressive 1% / 8R", risk: 1, R: 8, color: "#22C55E" },
+    { name: "High Risk 2% / 10R", risk: 2, R: 10, color: "#FB7185" }
+  ];
+
+  const series = scenarios.map(s => {
+    const arr = scenarioData(s.risk, s.R);
+    return {
+      name: s.name,
+      color: s.color,
+      data: arr.map(x => x.total)
+    };
+  });
+
+  drawMultiSeriesChart({
+    canvasId: "scenarioChart",
+    tooltipId: "scenarioTooltip",
+    legendId: "scenarioLegend",
+    series,
+    years,
+    targets: [
+      { v: freedomTarget, c: "#FACC15", t: "Freedom" }
+    ]
+  });
+}
+
+/* Boot */
+
+ids.forEach(id => {
+  window.addEventListener("load", () => {
+    const el = $(id);
+    if (!el) return;
+
+    el.addEventListener("input", () => calc(false));
+    el.addEventListener("change", () => calc(false));
+  });
+});
+
 load();
-window.addEventListener("load",calc);
+
+window.addEventListener("load", () => {
+  calc(false);
+  toast("اپ آماده است. اطلاعات به صورت لوکال ذخیره می‌شود.");
+});
+
+window.addEventListener("resize", () => {
+  clearTimeout(window.__chartResizeTimer);
+  window.__chartResizeTimer = setTimeout(() => calc(false), 250);
+});
 </script>
 </body>
 </html>
