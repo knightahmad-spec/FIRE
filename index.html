@@ -1,1588 +1,416 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Trader Financial Freedom Lab</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#070A12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Trader Lab">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-  <title>Trader Financial Freedom Lab</title>
-
-  <link rel="manifest" href="./manifest.json">
-  <meta name="theme-color" content="#070A12">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-title" content="Trader Lab">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-  <style>
-    :root {
-      --bg: #070A12;
-      --card: rgba(255,255,255,.08);
-      --card2: rgba(255,255,255,.12);
-      --txt: #F7FAFC;
-      --muted: #AAB3C5;
-      --cyan: #67E8F9;
-      --violet: #8B5CF6;
-      --green: #22C55E;
-      --yellow: #FACC15;
-      --red: #FB7185;
-      --blue: #60A5FA;
-      --border: rgba(255,255,255,.13);
-      --r: 22px;
-    }
-
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      padding: 16px 16px 90px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      color: var(--txt);
-      background:
-        radial-gradient(circle at 85% 0%, rgba(139,92,246,.45), transparent 34%),
-        radial-gradient(circle at 5% 0%, rgba(103,232,249,.25), transparent 32%),
-        linear-gradient(180deg, #070A12, #0B1020 55%, #05070D);
-    }
-
-    .app {
-      max-width: 1120px;
-      margin: auto;
-    }
-
-    h1 {
-      font-size: 29px;
-      margin: 14px 0 6px;
-      letter-spacing: -.5px;
-    }
-
-    p {
-      color: var(--muted);
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .top-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 8px 12px;
-      border: 1px solid rgba(103,232,249,.25);
-      background: rgba(103,232,249,.1);
-      border-radius: 999px;
-      color: var(--cyan);
-      font-size: 13px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 14px;
-    }
-
-    @media(min-width:800px) {
-      .two { grid-template-columns: 1fr 1fr; }
-      .three { grid-template-columns: repeat(3,1fr); }
-      .four { grid-template-columns: repeat(4,1fr); }
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--r);
-      padding: 16px;
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      box-shadow: 0 20px 50px rgba(0,0,0,.3);
-      transition: transform .2s ease, border-color .2s ease, background .2s ease;
-    }
-
-    .card:hover {
-      border-color: rgba(103,232,249,.22);
-      background: rgba(255,255,255,.095);
-    }
-
-    .card h2 {
-      font-size: 17px;
-      margin: 0 0 12px;
-    }
-
-    label {
-      display: block;
-      color: var(--muted);
-      font-size: 12px;
-      margin: 11px 0 6px;
-    }
-
-    input, select {
-      width: 100%;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.09);
-      color: var(--txt);
-      border-radius: 15px;
-      padding: 12px 13px;
-      font-size: 15px;
-      outline: none;
-      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease, transform .12s ease;
-    }
-
-    input:focus, select:focus {
-      border-color: var(--cyan);
-      box-shadow: 0 0 0 4px rgba(103,232,249,.12);
-      background: rgba(255,255,255,.12);
-    }
-
-    input.bump, select.bump {
-      animation: inputBump .25s ease;
-    }
-
-    @keyframes inputBump {
-      0% { transform: scale(1); }
-      45% { transform: scale(1.025); }
-      100% { transform: scale(1); }
-    }
-
-    .row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    button {
-      border: 0;
-      border-radius: 16px;
-      padding: 13px 12px;
-      color: white;
-      font-weight: 800;
-      font-size: 14px;
-      background: linear-gradient(135deg,var(--violet),var(--cyan));
-      margin-top: 12px;
-      width: 100%;
-      cursor: pointer;
-      box-shadow: 0 12px 26px rgba(103,232,249,.16);
-      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease, background .12s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    button:active {
-      transform: scale(.97);
-      filter: brightness(1.14);
-      box-shadow: 0 8px 18px rgba(103,232,249,.12);
-    }
-
-    button.secondary {
-      background: rgba(255,255,255,.1);
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: none;
-    }
-
-    button.danger {
-      background: rgba(251,113,133,.16);
-      border: 1px solid rgba(251,113,133,.34);
-      color: #fecdd3;
-      box-shadow: none;
-    }
-
-    button.success {
-      background: rgba(34,197,94,.17);
-      border: 1px solid rgba(34,197,94,.35);
-      color: #bbf7d0;
-      box-shadow: none;
-    }
-
-    .btn-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-
-    .metric {
-      background: rgba(255,255,255,.075);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 18px;
-      padding: 14px;
-      transition: transform .18s ease, border-color .18s ease;
-    }
-
-    .metric:hover {
-      transform: translateY(-1px);
-      border-color: rgba(103,232,249,.2);
-    }
-
-    .k {
-      color: var(--muted);
-      font-size: 12px;
-      margin-bottom: 7px;
-    }
-
-    .v {
-      font-size: 22px;
-      font-weight: 900;
-      letter-spacing: -.4px;
-    }
-
-    .s {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 7px;
-      line-height: 1.6;
-    }
-
-    .status {
-      background: linear-gradient(135deg, rgba(103,232,249,.14), rgba(139,92,246,.18));
-      border: 1px solid rgba(103,232,249,.22);
-      border-radius: 24px;
-      padding: 17px;
-      margin: 14px 0;
-      transition: border-color .2s ease, transform .2s ease;
-    }
-
-    .status.flash {
-      animation: statusFlash .45s ease;
-    }
-
-    @keyframes statusFlash {
-      0% { transform: scale(1); border-color: rgba(103,232,249,.22); }
-      40% { transform: scale(1.01); border-color: rgba(34,197,94,.55); }
-      100% { transform: scale(1); border-color: rgba(103,232,249,.22); }
-    }
-
-    .stage {
-      font-size: 25px;
-      font-weight: 950;
-      margin-bottom: 7px;
-    }
-
-    .bar {
-      height: 11px;
-      background: rgba(255,255,255,.1);
-      border-radius: 99px;
-      overflow: hidden;
-      margin-top: 12px;
-    }
-
-    .fill {
-      height: 100%;
-      width: 0;
-      background: linear-gradient(90deg,var(--violet),var(--cyan),var(--green));
-      border-radius: 99px;
-      transition: width .45s ease;
-    }
-
-    .pill {
-      display: inline-block;
-      font-size: 12px;
-      padding: 5px 9px;
-      margin: 3px;
-      border-radius: 99px;
-      background: rgba(255,255,255,.1);
-      color: var(--muted);
-    }
-
-    .note {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.8;
-      margin-top: 10px;
-    }
-
-    .green { color: var(--green); }
-    .yellow { color: var(--yellow); }
-    .red { color: var(--red); }
-    .cyan { color: var(--cyan); }
-    .blue { color: var(--blue); }
-
-    .scenario {
-      padding: 13px;
-      border-radius: 17px;
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.1);
-      transition: transform .18s ease, border-color .18s ease;
-    }
-
-    .scenario:hover {
-      transform: translateY(-2px);
-      border-color: rgba(103,232,249,.24);
-    }
-
-    .scenario b {
-      font-size: 15px;
-    }
-
-    .chart-box {
-      position: relative;
-      width: 100%;
-    }
-
-    canvas {
-      width: 100%;
-      height: 320px;
-      background: rgba(0,0,0,.22);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 18px;
-      margin-top: 8px;
-      display: block;
-    }
-
-    .chart-tooltip {
-      position: absolute;
-      pointer-events: none;
-      display: none;
-      z-index: 10;
-      background: rgba(7,10,18,.92);
-      border: 1px solid rgba(103,232,249,.35);
-      color: #F7FAFC;
-      padding: 8px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      line-height: 1.6;
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .legend-item {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 12px;
-      color: var(--muted);
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.1);
-      padding: 6px 9px;
-      border-radius: 999px;
-    }
-
-    .legend-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-    }
-
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: 24px;
-      transform: translateX(-50%) translateY(20px);
-      background: rgba(7,10,18,.92);
-      color: #fff;
-      border: 1px solid rgba(103,232,249,.28);
-      border-radius: 16px;
-      padding: 12px 14px;
-      min-width: 220px;
-      max-width: 88vw;
-      text-align: center;
-      font-size: 13px;
-      line-height: 1.6;
-      box-shadow: 0 20px 50px rgba(0,0,0,.38);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity .22s ease, transform .22s ease;
-      z-index: 999;
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 22px;
-      color: rgba(255,255,255,.44);
-      font-size: 12px;
-      line-height: 1.8;
-    }
-  </style>
+<style>
+:root{
+--bg:#070A12;--card:rgba(255,255,255,.08);--txt:#F7FAFC;--muted:#AAB3C5;
+--cyan:#67E8F9;--violet:#8B5CF6;--green:#22C55E;--yellow:#FACC15;--red:#FB7185;--blue:#60A5FA;
+--border:rgba(255,255,255,.13);--r:22px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{
+margin:0;padding:16px 16px 90px;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--txt);
+background:radial-gradient(circle at 85% 0%,rgba(139,92,246,.45),transparent 34%),
+radial-gradient(circle at 5% 0%,rgba(103,232,249,.25),transparent 32%),
+linear-gradient(180deg,#070A12,#0B1020 55%,#05070D);
+}
+.app{max-width:1120px;margin:auto}
+h1{font-size:29px;margin:14px 0 6px;letter-spacing:-.5px}
+p{color:var(--muted);line-height:1.8;font-size:14px}
+.badge{display:inline-block;padding:8px 12px;margin:3px;border:1px solid rgba(103,232,249,.25);background:rgba(103,232,249,.1);border-radius:999px;color:var(--cyan);font-size:13px}
+.grid{display:grid;grid-template-columns:1fr;gap:14px}
+@media(min-width:800px){.two{grid-template-columns:1fr 1fr}.three{grid-template-columns:repeat(3,1fr)}.four{grid-template-columns:repeat(4,1fr)}}
+.card,.metric,.status{
+background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;
+backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);box-shadow:0 20px 50px rgba(0,0,0,.3)
+}
+.card{transition:.2s}.card:hover{border-color:rgba(103,232,249,.25);background:rgba(255,255,255,.095)}
+.card h2{font-size:17px;margin:0 0 12px}
+label{display:block;color:var(--muted);font-size:12px;margin:11px 0 6px}
+input,select{
+width:100%;border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.09);color:var(--txt);
+border-radius:15px;padding:12px 13px;font-size:15px;outline:none;transition:.15s
+}
+input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 4px rgba(103,232,249,.12);background:rgba(255,255,255,.12)}
+input[type="checkbox"]{width:auto}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+button{
+border:0;border-radius:16px;padding:13px 12px;color:white;font-weight:800;font-size:14px;
+background:linear-gradient(135deg,var(--violet),var(--cyan));margin-top:12px;width:100%;cursor:pointer;
+box-shadow:0 12px 26px rgba(103,232,249,.16);transition:.12s;position:relative;overflow:hidden
+}
+button:active{transform:scale(.97);filter:brightness(1.14)}
+button.secondary{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14);box-shadow:none}
+button.success{background:rgba(34,197,94,.17);border:1px solid rgba(34,197,94,.35);color:#bbf7d0;box-shadow:none}
+button.danger{background:rgba(251,113,133,.16);border:1px solid rgba(251,113,133,.34);color:#fecdd3;box-shadow:none}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.k{color:var(--muted);font-size:12px;margin-bottom:7px}.v{font-size:22px;font-weight:900;letter-spacing:-.4px}.s,.note{color:var(--muted);font-size:12px;line-height:1.8;margin-top:7px}
+.stage{font-size:25px;font-weight:950;margin-bottom:7px}
+.bar{height:11px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden;margin-top:12px}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--cyan),var(--green));border-radius:99px;transition:width .45s ease}
+.status.flash{animation:flash .45s ease}@keyframes flash{40%{transform:scale(1.01);border-color:rgba(34,197,94,.55)}}
+.pill{display:inline-block;font-size:12px;padding:5px 9px;margin:3px;border-radius:99px;background:rgba(255,255,255,.1);color:var(--muted)}
+.green{color:var(--green)}.yellow{color:var(--yellow)}.red{color:var(--red)}.cyan{color:var(--cyan)}
+.scenario{padding:13px;border-radius:17px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1)}
+.chart-box{position:relative;width:100%}
+canvas{width:100%;height:320px;background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.1);border-radius:18px;margin-top:8px;display:block}
+.chart-tooltip{
+position:absolute;pointer-events:none;display:none;z-index:10;background:rgba(7,10,18,.92);
+border:1px solid rgba(103,232,249,.35);color:#fff;padding:8px 10px;border-radius:12px;font-size:12px;line-height:1.6
+}
+.legend{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.legend-item{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);padding:6px 9px;border-radius:999px}
+.legend-dot{width:9px;height:9px;border-radius:50%}
+.toast{
+position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:rgba(7,10,18,.92);
+color:#fff;border:1px solid rgba(103,232,249,.28);border-radius:16px;padding:12px 14px;min-width:220px;max-width:88vw;text-align:center;
+font-size:13px;opacity:0;pointer-events:none;transition:.22s;z-index:999
+}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.footer{text-align:center;margin-top:22px;color:rgba(255,255,255,.44);font-size:12px;line-height:1.8}
+</style>
 </head>
 
 <body>
 <div class="app">
 
-  <div class="top-row">
-    <span class="badge">PWA Ready</span>
-    <span class="badge">v3.0</span>
-    <span class="badge">Trader Mode</span>
-    <span class="badge">Dollar Based</span>
-  </div>
+<span class="badge">PWA Ready</span>
+<span class="badge">v4.0</span>
+<span class="badge">Trader Mode</span>
+<span class="badge">Dream + Total Goal</span>
 
-  <h1>Trader Financial Freedom Lab</h1>
+<h1>Trader Financial Freedom Lab</h1>
+<p>
+مدل دلاری برای آزادی مالی، زندگی رویایی، اهداف بزرگ، سفر سالانه و ترید بر اساس R-Multiple.
+اطلاعاتی که وارد می‌کنی به صورت لوکال روی همین مرورگر ذخیره می‌شود.
+</p>
 
-  <p>
-    مدل دلاری برای آزادی مالی، اهداف بزرگ، هزینه سفر سالانه و ترید بر اساس R-Multiple.
-    آزادی مالی با <b>Safe Withdrawal Rate</b> محاسبه می‌شود و رشد ترید با <b>Risk × Monthly R</b>.
-  </p>
-
-  <div class="status" id="statusBox">
-    <div class="stage" id="stage">در حال محاسبه...</div>
-    <div class="note" id="stageDesc"></div>
-    <div class="bar"><div class="fill" id="freedomBar"></div></div>
-    <div class="note" id="progressText"></div>
-  </div>
-
-  <div class="grid two">
-    <div class="card">
-      <h2>مالی شخصی</h2>
-
-      <div class="row">
-        <div>
-          <label>سرمایه کل فعلی، بدون حساب ترید</label>
-          <input id="netWorth" type="number" value="15000">
-        </div>
-        <div>
-          <label>نقد اضطراری فعلی</label>
-          <input id="cash" type="number" value="3000">
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>درآمد ماهانه غیر از ترید</label>
-          <input id="income" type="number" value="1000">
-        </div>
-        <div>
-          <label>هزینه ماهانه پایه</label>
-          <input id="basicExp" type="number" value="500">
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>هزینه ماهانه مطلوب</label>
-          <input id="desiredExp" type="number" value="750">
-        </div>
-        <div>
-          <label>هزینه زندگی رویایی ماهانه</label>
-          <input id="dreamExp" type="number" value="2500">
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>هزینه سفر سالانه</label>
-          <input id="travelAnnual" type="number" value="2000">
-        </div>
-        <div>
-          <label>صندوق اضطراری، ماه</label>
-          <input id="emMonths" type="number" value="6">
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>سرمایه‌گذاری ماهانه غیر از ترید</label>
-          <input id="investMonthly" type="number" value="200">
-        </div>
-        <div>
-          <label>نرخ برداشت امن، درصد</label>
-          <input id="swr" type="number" value="4" step="0.1">
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <button onclick="calc(true)">محاسبه</button>
-        <button class="secondary" onclick="resetSettings()">ریست</button>
-      </div>
-
-      <div class="note">
-        سفر سالانه به هزینه سبک زندگی اضافه می‌شود و در هدف آزادی مالی لحاظ می‌شود.
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>موتور ترید</h2>
-
-      <div class="row">
-        <div>
-          <label>بالانس حساب ترید</label>
-          <input id="tradingBalance" type="number" value="15000">
-        </div>
-        <div>
-          <label>ریسک هر معامله، درصد</label>
-          <input id="riskPerTrade" type="number" value="0.5" step="0.1">
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>Monthly R دستی</label>
-          <input id="monthlyR" type="number" value="6" step="0.1">
-        </div>
-        <div>
-          <label>تعداد معاملات ماهانه</label>
-          <input id="tradesPerMonth" type="number" value="20">
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>Win Rate، درصد</label>
-          <input id="winRate" type="number" value="45" step="1">
-        </div>
-        <div>
-          <label>میانگین برد، R</label>
-          <input id="avgWinR" type="number" value="2.2" step="0.1">
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>میانگین باخت، R</label>
-          <input id="avgLossR" type="number" value="1" step="0.1">
-        </div>
-        <div>
-          <label>روش محاسبه R</label>
-          <select id="rMode">
-            <option value="manual">Monthly R دستی</option>
-            <option value="expectancy">بر اساس WinRate و RR</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>درصد برداشت از سود ترید</label>
-          <input id="withdrawProfitPct" type="number" value="50" step="5">
-        </div>
-        <div>
-          <label>افق شبیه‌سازی، سال</label>
-          <input id="years" type="number" value="30">
-        </div>
-      </div>
-
-      <div class="btn-row">
-        <button class="success" onclick="setScenario('realistic')">تریدر منطقی</button>
-        <button class="secondary" onclick="setScenario('aggressive')">تهاجمی</button>
-      </div>
-
-      <div class="btn-row">
-        <button class="secondary" onclick="exportSettings()">Export</button>
-        <button class="secondary" onclick="importSettingsPrompt()">Import</button>
-      </div>
-
-      <button class="secondary" onclick="shareSummary()">Share Summary</button>
-
-      <div class="note">
-        مثال: Monthly R = 6R و ریسک هر معامله = 0.5٪ یعنی حدود 3٪ بازده ماهانه قبل از برداشت.
-      </div>
-    </div>
-  </div>
-
-  <div class="grid three" style="margin-top:14px">
-    <div class="metric">
-      <div class="k">هدف آزادی مالی</div>
-      <div class="v" id="freedomTarget">$0</div>
-      <div class="s">هزینه مطلوب + سفر سالانه / SWR</div>
-    </div>
-    <div class="metric">
-      <div class="k">زمان رسیدن با ترید</div>
-      <div class="v" id="timeToFreedom">-</div>
-      <div class="s">بعد از هزینه‌ها و برداشت‌ها</div>
-    </div>
-    <div class="metric">
-      <div class="k">سود ماهانه ترید</div>
-      <div class="v" id="tradingProfit">$0</div>
-      <div class="s" id="tradingReturnText">-</div>
-    </div>
-  </div>
-
-  <div class="grid four" style="margin-top:14px">
-    <div class="metric">
-      <div class="k">Monthly R موثر</div>
-      <div class="v" id="effectiveR">0R</div>
-      <div class="s">بر اساس روش انتخابی</div>
-    </div>
-    <div class="metric">
-      <div class="k">بازده ماهانه ترید</div>
-      <div class="v" id="monthlyTradingReturn">0%</div>
-      <div class="s">Risk × Monthly R</div>
-    </div>
-    <div class="metric">
-      <div class="k">حداقل بالانس پوشش خرج</div>
-      <div class="v" id="minBalanceExpense">$0</div>
-      <div class="s">برای پوشش هزینه ماهانه مطلوب + سفر</div>
-    </div>
-    <div class="metric">
-      <div class="k">R لازم برای خرج ماهانه</div>
-      <div class="v" id="requiredR">0R</div>
-      <div class="s">روی بالانس فعلی ترید</div>
-    </div>
-  </div>
-
-  <div class="grid two" style="margin-top:14px">
-    <div class="card">
-      <h2>اهداف بزرگ</h2>
-
-      <div class="row">
-        <div>
-          <label>خرید خانه</label>
-          <input id="house" type="number" value="200000">
-        </div>
-        <div>
-          <label>خرید ویلا</label>
-          <input id="villa" type="number" value="120000">
-        </div>
-      </div>
-
-      <div class="row">
-        <div>
-          <label>خرید خودرو</label>
-          <input id="car" type="number" value="40000">
-        </div>
-        <div>
-          <label>بودجه سفر سالانه هدف</label>
-          <input id="travelGoal" type="number" value="5000">
-        </div>
-      </div>
-
-      <div id="goals" class="note"></div>
-    </div>
-
-    <div class="card">
-      <h2>هشدارها و تحلیل</h2>
-      <div id="warnings" class="note"></div>
-
-      <div style="margin-top:8px">
-        <span class="pill">Risk</span>
-        <span class="pill">R-Multiple</span>
-        <span class="pill">SWR</span>
-        <span class="pill">Travel Budget</span>
-        <span class="pill">PWA</span>
-        <span class="pill">LocalStorage</span>
-      </div>
-    </div>
-  </div>
-
-  <div class="grid two" style="margin-top:14px">
-    <div class="card">
-      <h2>نمودار رشد سرمایه کل</h2>
-      <div class="chart-box">
-        <canvas id="wealthChart"></canvas>
-        <div class="chart-tooltip" id="wealthTooltip"></div>
-      </div>
-      <div class="legend" id="wealthLegend"></div>
-      <div class="note">
-        محور افقی: سال — محور عمودی: کل سرمایه دلاری شامل دارایی + حساب ترید.
-      </div>
-    </div>
-
-    <div class="card">
-      <h2>مقایسه سناریوهای ترید</h2>
-      <div class="chart-box">
-        <canvas id="scenarioChart"></canvas>
-        <div class="chart-tooltip" id="scenarioTooltip"></div>
-      </div>
-      <div class="legend" id="scenarioLegend"></div>
-      <div class="note">
-        مقایسه رشد سرمایه در سناریوهای مختلف Risk per Trade و Monthly R.
-      </div>
-    </div>
-  </div>
-
-  <div class="card" style="margin-top:14px">
-    <h2>سناریوهای سریع</h2>
-    <div class="grid four" id="scenarioCards"></div>
-  </div>
-
-  <div class="footer">
-    Version 3.0 • GitHub Pages PWA • اطلاعات ورودی در مرورگر خودت ذخیره می‌شود.
-    <br>
-    توصیه سرمایه‌گذاری نیست؛ ابزار برنامه‌ریزی شخصی است.
-  </div>
-
+<div class="status" id="statusBox">
+<div class="stage" id="stage">در حال محاسبه...</div>
+<div class="note" id="stageDesc"></div>
+<div class="bar"><div class="fill" id="freedomBar"></div></div>
+<div class="note" id="progressText"></div>
 </div>
 
+<div class="grid two">
+<div class="card">
+<h2>مالی شخصی</h2>
+<div class="row">
+<div><label>سرمایه فعلی، بدون حساب ترید</label><input id="netWorth" type="number" value="15000"></div>
+<div><label>نقد اضطراری فعلی</label><input id="cash" type="number" value="3000"></div>
+</div>
+<div class="row">
+<div><label>درآمد ماهانه غیر از ترید</label><input id="income" type="number" value="1000"></div>
+<div><label>هزینه ماهانه پایه</label><input id="basicExp" type="number" value="500"></div>
+</div>
+<div class="row">
+<div><label>هزینه ماهانه مطلوب</label><input id="desiredExp" type="number" value="750"></div>
+<div><label>هزینه زندگی رویایی ماهانه</label><input id="dreamExp" type="number" value="2500"></div>
+</div>
+<div class="row">
+<div><label>هزینه سفر سالانه</label><input id="travelAnnual" type="number" value="2000"></div>
+<div><label>صندوق اضطراری، ماه</label><input id="emMonths" type="number" value="6"></div>
+</div>
+<div class="row">
+<div><label>سرمایه‌گذاری ماهانه غیر از ترید</label><input id="investMonthly" type="number" value="200"></div>
+<div><label>SWR / نرخ برداشت امن، درصد</label><input id="swr" type="number" value="4" step="0.1"></div>
+</div>
+<div class="btn-row">
+<button onclick="calc(true)">محاسبه</button>
+<button class="danger" onclick="resetSettings()">ریست ذخیره</button>
+</div>
+</div>
+
+<div class="card">
+<h2>موتور ترید</h2>
+<div class="row">
+<div><label>بالانس حساب ترید</label><input id="tradingBalance" type="number" value="15000"></div>
+<div><label>ریسک هر معامله، درصد</label><input id="riskPerTrade" type="number" value="0.5" step="0.1"></div>
+</div>
+<div class="row">
+<div><label>Monthly R دستی</label><input id="monthlyR" type="number" value="6" step="0.1"></div>
+<div><label>تعداد معاملات ماهانه</label><input id="tradesPerMonth" type="number" value="20"></div>
+</div>
+<div class="row">
+<div><label>Win Rate، درصد</label><input id="winRate" type="number" value="45"></div>
+<div><label>میانگین برد، R</label><input id="avgWinR" type="number" value="2.2" step="0.1"></div>
+</div>
+<div class="row">
+<div><label>میانگین باخت، R</label><input id="avgLossR" type="number" value="1" step="0.1"></div>
+<div><label>روش محاسبه R</label><select id="rMode"><option value="manual">Monthly R دستی</option><option value="expectancy">بر اساس WinRate و RR</option></select></div>
+</div>
+<div class="row">
+<div><label>درصد برداشت از سود ترید</label><input id="withdrawProfitPct" type="number" value="50" step="5"></div>
+<div><label>افق شبیه‌سازی، سال</label><input id="years" type="number" value="30"></div>
+</div>
+<div class="btn-row">
+<button class="success" onclick="setScenario('realistic')">تریدر منطقی</button>
+<button class="secondary" onclick="setScenario('aggressive')">تهاجمی</button>
+</div>
+<div class="btn-row">
+<button class="secondary" onclick="exportSettings()">Export</button>
+<button class="secondary" onclick="importSettingsPrompt()">Import</button>
+</div>
+<button class="secondary" onclick="shareSummary()">Share Summary</button>
+</div>
+</div>
+
+<div class="grid four" style="margin-top:14px">
+<div class="metric"><div class="k">هدف امنیت مالی</div><div class="v" id="securityTarget">$0</div><div class="s">هزینه پایه + سفر / SWR</div></div>
+<div class="metric"><div class="k">زمان تا امنیت مالی</div><div class="v" id="timeToSecurity">-</div><div class="s">اولین سطح آرامش</div></div>
+<div class="metric"><div class="k">هدف آزادی مالی</div><div class="v" id="freedomTarget">$0</div><div class="s">هزینه مطلوب + سفر / SWR</div></div>
+<div class="metric"><div class="k">زمان تا آزادی مالی</div><div class="v" id="timeToFreedom">-</div><div class="s">سبک زندگی مطلوب پایدار</div></div>
+</div>
+
+<div class="grid four" style="margin-top:14px">
+<div class="metric"><div class="k">هدف زندگی رویایی</div><div class="v" id="dreamTarget">$0</div><div class="s">هزینه رویایی + سفر / SWR</div></div>
+<div class="metric"><div class="k">زمان تا زندگی رویایی</div><div class="v" id="timeToDream">-</div><div class="s">سطح Dream Lifestyle</div></div>
+<div class="metric"><div class="k">هدف کل زندگی</div><div class="v" id="totalLifeGoal">$0</div><div class="s">Dream + خانه + ویلا + خودرو + سفر هدف</div></div>
+<div class="metric"><div class="k">زمان تا هدف کل زندگی</div><div class="v" id="timeToTotalLife">-</div><div class="s">کامل‌ترین تارگت</div></div>
+</div>
+
+<div class="grid four" style="margin-top:14px">
+<div class="metric"><div class="k">سود ماهانه ترید</div><div class="v" id="tradingProfit">$0</div><div class="s" id="tradingReturnText">-</div></div>
+<div class="metric"><div class="k">Monthly R موثر</div><div class="v" id="effectiveR">0R</div><div class="s">بر اساس روش انتخابی</div></div>
+<div class="metric"><div class="k">بازده ماهانه ترید</div><div class="v" id="monthlyTradingReturn">0%</div><div class="s">Risk × Monthly R</div></div>
+<div class="metric"><div class="k">بالانس لازم برای پوشش خرج</div><div class="v" id="minBalanceExpense">$0</div><div class="s">خرج مطلوب + سفر ماهانه</div></div>
+</div>
+
+<div class="grid two" style="margin-top:14px">
+<div class="card">
+<h2>اهداف بزرگ</h2>
+<div class="row">
+<div><label>خرید خانه</label><input id="house" type="number" value="200000"></div>
+<div><label>خرید ویلا</label><input id="villa" type="number" value="120000"></div>
+</div>
+<div class="row">
+<div><label>خرید خودرو</label><input id="car" type="number" value="40000"></div>
+<div><label>بودجه سفر هدف جداگانه</label><input id="travelGoal" type="number" value="5000"></div>
+</div>
+<div class="note green">
+این اهداف در «هدف کل زندگی» حساب می‌شوند، نه در FIRE کلاسیک.
+</div>
+<div id="goals" class="note"></div>
+</div>
+
+<div class="card">
+<h2>هشدارها و تحلیل</h2>
+<div id="warnings" class="note"></div>
+<div style="margin-top:8px">
+<span class="pill">Security</span><span class="pill">Freedom</span><span class="pill">Dream</span><span class="pill">Total Life</span><span class="pill">R-Multiple</span>
+</div>
+</div>
+</div>
+
+<div class="grid two" style="margin-top:14px">
+<div class="card">
+<h2>نمودار رشد سرمایه کل</h2>
+<div class="chart-box"><canvas id="wealthChart"></canvas><div class="chart-tooltip" id="wealthTooltip"></div></div>
+<div class="legend" id="wealthLegend"></div>
+<div class="note">محور افقی: سال — محور عمودی: کل سرمایه دلاری شامل دارایی + حساب ترید.</div>
+</div>
+<div class="card">
+<h2>مقایسه سناریوهای ترید</h2>
+<div class="chart-box"><canvas id="scenarioChart"></canvas><div class="chart-tooltip" id="scenarioTooltip"></div></div>
+<div class="legend" id="scenarioLegend"></div>
+<div class="note">مقایسه مسیرها با ریسک و Monthly R متفاوت.</div>
+</div>
+</div>
+
+<div class="card" style="margin-top:14px">
+<h2>سناریوهای سریع</h2>
+<div class="grid four" id="scenarioCards"></div>
+</div>
+
+<div class="footer">
+Version 4.0 • GitHub Pages PWA • اطلاعات روی مرورگر خودت ذخیره می‌شود.
+<br>ابزار برنامه‌ریزی شخصی است، توصیه مالی نیست.
+</div>
+
+</div>
 <div class="toast" id="toast"></div>
 
 <script>
-if ("serviceWorker" in navigator) {
-  window.addEventListener("load", () => {
-    navigator.serviceWorker.register("./sw.js").catch(() => {});
-  });
-}
+if("serviceWorker"in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 
-const ids = [
-  "netWorth","cash","income","basicExp","desiredExp","dreamExp","travelAnnual","emMonths",
-  "investMonthly","swr","tradingBalance","riskPerTrade","monthlyR","tradesPerMonth",
-  "winRate","avgWinR","avgLossR","rMode","withdrawProfitPct","years","house","villa","car","travelGoal"
+const ids=[
+"netWorth","cash","income","basicExp","desiredExp","dreamExp","travelAnnual","emMonths","investMonthly","swr",
+"tradingBalance","riskPerTrade","monthlyR","tradesPerMonth","winRate","avgWinR","avgLossR","rMode","withdrawProfitPct","years",
+"house","villa","car","travelGoal"
 ];
 
-function $(id) {
-  return document.getElementById(id);
+function $(id){return document.getElementById(id)}
+function n(id){const v=parseFloat($(id).value);return isNaN(v)?0:v}
+function money(x){if(!isFinite(x))return"∞";if(Math.abs(x)>=1e6)return"$"+(x/1e6).toFixed(2)+"M";return"$"+Math.round(x).toLocaleString("en-US")}
+function compactMoney(x){if(!isFinite(x))return"∞";let a=Math.abs(x);if(a>=1e9)return"$"+(x/1e9).toFixed(1)+"B";if(a>=1e6)return"$"+(x/1e6).toFixed(1)+"M";if(a>=1e3)return"$"+Math.round(x/1e3)+"K";return"$"+Math.round(x)}
+function pct(x){return isFinite(x)?(x*100).toFixed(1)+"%":"-"}
+function ytext(m){if(!isFinite(m))return"نمی‌رسد";if(m<=0)return"همین الان";const y=Math.floor(m/12),mm=Math.round(m%12);return y?`${y} سال ${mm?`و ${mm} ماه`:""}`:`${mm} ماه`}
+function toast(msg){const el=$("toast");el.innerHTML=msg;el.classList.add("show");clearTimeout(window.__t);window.__t=setTimeout(()=>el.classList.remove("show"),2200)}
+function flash(){const s=$("statusBox");s.classList.remove("flash");void s.offsetWidth;s.classList.add("flash")}
+
+function save(){let d={};ids.forEach(id=>{if($(id))d[id]=$(id).value});localStorage.setItem("traderLab_v4",JSON.stringify(d))}
+function load(){try{let d=JSON.parse(localStorage.getItem("traderLab_v4")||localStorage.getItem("traderLab_v3")||"{}");ids.forEach(id=>{if(d[id]!==undefined&&$(id))$(id).value=d[id]})}catch(e){}}
+function resetSettings(){if(!confirm("تنظیمات ذخیره‌شده پاک شود؟"))return;localStorage.removeItem("traderLab_v4");localStorage.removeItem("traderLab_v3");toast("پاک شد. صفحه را رفرش کن.")}
+function exportSettings(){let d={};ids.forEach(id=>d[id]=$(id).value);let j=JSON.stringify(d,null,2);navigator.clipboard.writeText(j).then(()=>toast("تنظیمات کپی شد")).catch(()=>prompt("Copy:",j))}
+function importSettingsPrompt(){let j=prompt("Paste JSON:");if(!j)return;try{let d=JSON.parse(j);Object.keys(d).forEach(id=>{if($(id))$(id).value=d[id]});save();calc(true);toast("Import شد")}catch(e){alert("JSON نامعتبر")}}
+function shareSummary(){
+const t=`Trader Lab\nSecurity: ${$("timeToSecurity").innerText}\nFreedom: ${$("timeToFreedom").innerText}\nDream: ${$("timeToDream").innerText}\nTotal Life: ${$("timeToTotalLife").innerText}\n${location.href}`;
+if(navigator.share)navigator.share({title:"Trader Lab",text:t,url:location.href});else navigator.clipboard.writeText(t).then(()=>toast("Summary کپی شد"))
 }
 
-function n(id) {
-  const v = parseFloat($(id).value);
-  return isNaN(v) ? 0 : v;
+function getEffectiveR(){
+if($("rMode").value==="manual")return n("monthlyR");
+const wr=n("winRate")/100;return (wr*n("avgWinR")-(1-wr)*n("avgLossR"))*n("tradesPerMonth")
 }
 
-function money(x) {
-  if (!isFinite(x)) return "∞";
-  if (Math.abs(x) >= 1e6) return "$" + (x / 1e6).toFixed(2) + "M";
-  return "$" + Math.round(x).toLocaleString("en-US");
+function simulate(p){
+let{netWorth,tradingBalance,investMonthly,income,desiredMonthlyTotal,annualReturn,monthlyTradingReturn,withdrawPct,months}=p,arr=[];
+for(let m=0;m<=months;m++){
+let profit=tradingBalance*monthlyTradingReturn;
+let withdraw=Math.max(0,profit*withdrawPct);
+let reinvest=profit-withdraw;
+let outsideSurplus=income-desiredMonthlyTotal;
+let add=investMonthly+Math.max(0,outsideSurplus)+withdraw;
+netWorth=netWorth*(1+annualReturn/12)+add;
+tradingBalance=Math.max(0,tradingBalance+reinvest);
+arr.push({m,netWorth,tradingBalance,total:netWorth+tradingBalance,profit});
+}
+return arr;
+}
+function monthsToTarget(arr,target){for(const p of arr){if(p.total>=target)return p.m}return Infinity}
+
+function calc(reaction=false){
+const netWorth=n("netWorth"),cash=n("cash"),income=n("income"),basicExp=n("basicExp"),desiredExp=n("desiredExp"),dreamExp=n("dreamExp");
+const travelAnnual=n("travelAnnual"),travelMonthly=travelAnnual/12,desiredMonthlyTotal=desiredExp+travelMonthly;
+const swr=n("swr")/100,tradingBalance=n("tradingBalance"),risk=n("riskPerTrade")/100,effR=getEffectiveR(),monthlyTradingReturn=effR*risk;
+const withdrawPct=n("withdrawProfitPct")/100,years=Math.max(1,n("years")),months=years*12;
+
+const securityTarget=swr>0?(basicExp*12+travelAnnual)/swr:Infinity;
+const freedomTarget=swr>0?(desiredExp*12+travelAnnual)/swr:Infinity;
+const dreamTarget=swr>0?(dreamExp*12+travelAnnual)/swr:Infinity;
+const bigGoals=n("house")+n("villa")+n("car")+n("travelGoal");
+const totalLifeGoal=dreamTarget+bigGoals;
+const emergencyTarget=basicExp*n("emMonths");
+
+const arr=simulate({netWorth,tradingBalance,investMonthly:n("investMonthly"),income,desiredMonthlyTotal,annualReturn:.04,monthlyTradingReturn,withdrawPct,months});
+
+const mts=monthsToTarget(arr,securityTarget),mtf=monthsToTarget(arr,freedomTarget),mtd=monthsToTarget(arr,dreamTarget),mtl=monthsToTarget(arr,totalLifeGoal);
+const total=netWorth+tradingBalance;
+const progress=Math.min(total/freedomTarget,1);
+
+$("securityTarget").innerText=money(securityTarget);$("timeToSecurity").innerText=ytext(mts);
+$("freedomTarget").innerText=money(freedomTarget);$("timeToFreedom").innerText=ytext(mtf);
+$("dreamTarget").innerText=money(dreamTarget);$("timeToDream").innerText=ytext(mtd);
+$("totalLifeGoal").innerText=money(totalLifeGoal);$("timeToTotalLife").innerText=ytext(mtl);
+
+const tradingProfit=tradingBalance*monthlyTradingReturn;
+$("tradingProfit").innerText=money(tradingProfit);
+$("tradingReturnText").innerText=`ماهانه ${pct(monthlyTradingReturn)} قبل از برداشت`;
+$("effectiveR").innerText=effR.toFixed(1)+"R";
+$("monthlyTradingReturn").innerText=pct(monthlyTradingReturn);
+$("minBalanceExpense").innerText=monthlyTradingReturn>0?money(desiredMonthlyTotal/monthlyTradingReturn):"∞";
+
+$("freedomBar").style.width=Math.round(progress*100)+"%";
+$("progressText").innerText=`${Math.round(progress*100)}٪ مسیر آزادی مالی. فاصله تا Freedom: ${money(Math.max(0,freedomTarget-total))}`;
+
+let stage,desc;
+if(cash<emergencyTarget){stage="ساخت صندوق اضطراری";desc=`اولویت: تکمیل ${money(emergencyTarget)} نقد اضطراری.`}
+else if(total<securityTarget){stage="ثبات مالی";desc="هدف بعدی رسیدن به امنیت مالی است."}
+else if(total<freedomTarget){stage="امنیت مالی";desc="هزینه پایه قابل پوشش است؛ هدف بعدی آزادی مالی."}
+else if(total<dreamTarget){stage="آزادی مالی";desc="سبک زندگی مطلوب پایدار شده؛ هدف بعدی زندگی رویایی."}
+else if(total<totalLifeGoal){stage="زندگی رویایی";desc="سبک زندگی رویایی قابل پوشش است؛ هدف بعدی خرید اهداف بزرگ."}
+else{stage="هدف کل زندگی";desc="Dream + خانه + ویلا + خودرو + سفر هدف پوشش داده شده."}
+$("stage").innerText=stage;$("stageDesc").innerText=desc;
+
+const goals=[["خانه",n("house")],["ویلا",n("villa")],["خودرو",n("car")],["سفر هدف",n("travelGoal")]];
+$("goals").innerHTML=`جمع اهداف بزرگ: <b class="cyan">${money(bigGoals)}</b><br>`+goals.map(g=>`• ${g[0]}: <b>${money(g[1])}</b> — زمان رسیدن مستقل: <b class="cyan">${ytext(monthsToTarget(arr,g[1]))}</b><br>`).join("");
+
+let w=[];
+if(risk>.01)w.push("ریسک بالای ۱٪ برای هر ترید Drawdown را زیاد می‌کند.");
+if(monthlyTradingReturn>.08)w.push("بازده ماهانه بالای ۸٪ را برای بلندمدت محافظه‌کارانه فرض نکن.");
+if(effR<0)w.push("Expectancy منفی است؛ مدل ترید سرمایه را کاهش می‌دهد.");
+if(withdrawPct>.7)w.push("برداشت بیش از ۷۰٪ سود، رشد حساب را کند می‌کند.");
+if(cash<emergencyTarget)w.push("قبل از افزایش ریسک، صندوق اضطراری را کامل کن.");
+if(!w.length)w.push("فرضیات فعلی متعادل‌اند؛ سناریوهای بدبینانه را هم تست کن.");
+$("warnings").innerHTML=w.map(x=>"• "+x).join("<br>");
+
+drawSingle("wealthChart","wealthTooltip","wealthLegend",arr.map(x=>x.total),years,[
+{v:securityTarget,c:"#60A5FA",t:"Security"},
+{v:freedomTarget,c:"#67E8F9",t:"Freedom"},
+{v:dreamTarget,c:"#FACC15",t:"Dream"},
+{v:totalLifeGoal,c:"#FB7185",t:"Total Life"}
+],"Total Wealth");
+
+drawScenario(totalLifeGoal,years);
+renderScenarioCards(totalLifeGoal);
+save();
+if(reaction){flash();toast("محاسبه شد و ذخیره شد")}
 }
 
-function compactMoney(x) {
-  if (!isFinite(x)) return "∞";
-  const abs = Math.abs(x);
-  if (abs >= 1e9) return "$" + (x / 1e9).toFixed(1) + "B";
-  if (abs >= 1e6) return "$" + (x / 1e6).toFixed(1) + "M";
-  if (abs >= 1e3) return "$" + Math.round(x / 1e3) + "K";
-  return "$" + Math.round(x);
+function setScenario(t){
+if(t==="realistic"){$("riskPerTrade").value=.5;$("monthlyR").value=6;$("winRate").value=45;$("avgWinR").value=2.2;$("avgLossR").value=1;$("tradesPerMonth").value=20;$("withdrawProfitPct").value=50;toast("سناریوی منطقی اعمال شد")}
+else{$("riskPerTrade").value=1;$("monthlyR").value=8;$("winRate").value=48;$("avgWinR").value=2.3;$("avgLossR").value=1;$("tradesPerMonth").value=22;$("withdrawProfitPct").value=40;toast("سناریوی تهاجمی اعمال شد")}
+calc(true)
 }
 
-function pct(x) {
-  if (!isFinite(x)) return "-";
-  return (x * 100).toFixed(1) + "%";
+function scenarioData(riskPct,R){
+return simulate({netWorth:n("netWorth"),tradingBalance:n("tradingBalance"),investMonthly:n("investMonthly"),income:n("income"),
+desiredMonthlyTotal:n("desiredExp")+n("travelAnnual")/12,annualReturn:.04,monthlyTradingReturn:(riskPct/100)*R,withdrawPct:n("withdrawProfitPct")/100,months:n("years")*12})
 }
-
-function ytext(m) {
-  if (!isFinite(m)) return "نمی‌رسد";
-  if (m <= 0) return "همین الان";
-  const y = Math.floor(m / 12);
-  const mm = Math.round(m % 12);
-  return y ? `${y} سال ${mm ? `و ${mm} ماه` : ""}` : `${mm} ماه`;
-}
-
-function toast(msg) {
-  const el = $("toast");
-  el.innerHTML = msg;
-  el.classList.add("show");
-  clearTimeout(window.__toastTimer);
-  window.__toastTimer = setTimeout(() => el.classList.remove("show"), 2200);
-}
-
-function flashStatus() {
-  const s = $("statusBox");
-  s.classList.remove("flash");
-  void s.offsetWidth;
-  s.classList.add("flash");
-}
-
-function bumpInputs() {
-  ids.forEach(id => {
-    const el = $(id);
-    if (!el) return;
-    el.classList.remove("bump");
-    void el.offsetWidth;
-    el.classList.add("bump");
-  });
-}
-
-function save() {
-  const d = {};
-  ids.forEach(id => {
-    const el = $(id);
-    if (el) d[id] = el.value;
-  });
-  localStorage.setItem("traderLab_v3", JSON.stringify(d));
-}
-
-function load() {
-  try {
-    const raw = localStorage.getItem("traderLab_v3") || localStorage.getItem("traderLab") || "{}";
-    const d = JSON.parse(raw);
-    ids.forEach(id => {
-      if (d[id] !== undefined && $(id)) $(id).value = d[id];
-    });
-  } catch(e) {}
-}
-
-function resetSettings() {
-  if (!confirm("همه تنظیمات ذخیره‌شده پاک شود؟")) return;
-  localStorage.removeItem("traderLab_v3");
-  localStorage.removeItem("traderLab");
-  toast("تنظیمات پاک شد. صفحه را رفرش کن.");
-}
-
-function exportSettings() {
-  const data = {};
-  ids.forEach(id => {
-    const el = $(id);
-    if (el) data[id] = el.value;
-  });
-
-  const json = JSON.stringify(data, null, 2);
-
-  navigator.clipboard.writeText(json)
-    .then(() => toast("تنظیمات کپی شد."))
-    .catch(() => {
-      prompt("Copy your settings:", json);
-    });
-}
-
-function importSettingsPrompt() {
-  const json = prompt("Paste exported settings JSON:");
-  if (!json) return;
-
-  try {
-    const data = JSON.parse(json);
-    Object.keys(data).forEach(id => {
-      const el = $(id);
-      if (el) el.value = data[id];
-    });
-    save();
-    calc(true);
-    toast("تنظیمات Import شد.");
-  } catch(e) {
-    alert("JSON نامعتبر است.");
-  }
-}
-
-function shareSummary() {
-  const summary = `
-Trader Financial Freedom Lab
-
-Freedom Target: ${$("freedomTarget").innerText}
-Time to Freedom: ${$("timeToFreedom").innerText}
-Monthly Trading Profit: ${$("tradingProfit").innerText}
-Effective Monthly R: ${$("effectiveR").innerText}
-Monthly Trading Return: ${$("monthlyTradingReturn").innerText}
-
-${location.href}
-  `.trim();
-
-  if (navigator.share) {
-    navigator.share({
-      title: "Trader Financial Freedom Lab",
-      text: summary,
-      url: location.href
-    });
-  } else {
-    navigator.clipboard.writeText(summary)
-      .then(() => toast("Summary کپی شد."))
-      .catch(() => prompt("Copy summary:", summary));
-  }
-}
-
-function getEffectiveR() {
-  const mode = $("rMode").value;
-
-  if (mode === "manual") return n("monthlyR");
-
-  const wr = n("winRate") / 100;
-  const expR = wr * n("avgWinR") - (1 - wr) * n("avgLossR");
-  return expR * n("tradesPerMonth");
-}
-
-function simulate(params) {
-  let {
-    netWorth,
-    tradingBalance,
-    investMonthly,
-    income,
-    desiredMonthlyTotal,
-    annualReturn,
-    monthlyTradingReturn,
-    withdrawPct,
-    months
-  } = params;
-
-  const arr = [];
-
-  for (let m = 0; m <= months; m++) {
-    const tradingProfit = tradingBalance * monthlyTradingReturn;
-    const withdraw = Math.max(0, tradingProfit * withdrawPct);
-    const reinvest = tradingProfit - withdraw;
-
-    const outsideSurplus = income - desiredMonthlyTotal;
-    const addToWealth = investMonthly + Math.max(0, outsideSurplus) + withdraw;
-
-    netWorth = netWorth * (1 + annualReturn / 12) + addToWealth;
-    tradingBalance = Math.max(0, tradingBalance + reinvest);
-
-    arr.push({
-      m,
-      netWorth,
-      tradingBalance,
-      total: netWorth + tradingBalance,
-      profit: tradingProfit
-    });
-  }
-
-  return arr;
-}
-
-function monthsToTarget(arr, target) {
-  for (const p of arr) {
-    if (p.total >= target) return p.m;
-  }
-  return Infinity;
-}
-
-function calc(withReaction = false) {
-  const netWorth = n("netWorth");
-  const cash = n("cash");
-  const income = n("income");
-  const basicExp = n("basicExp");
-  const desiredExp = n("desiredExp");
-  const dreamExp = n("dreamExp");
-  const travelAnnual = n("travelAnnual");
-  const travelMonthly = travelAnnual / 12;
-  const desiredMonthlyTotal = desiredExp + travelMonthly;
-  const investMonthly = n("investMonthly");
-  const swr = n("swr") / 100;
-  const tradingBalance = n("tradingBalance");
-  const risk = n("riskPerTrade") / 100;
-  const effR = getEffectiveR();
-  const monthlyTradingReturn = effR * risk;
-  const withdrawPct = n("withdrawProfitPct") / 100;
-  const years = Math.max(1, n("years"));
-  const months = years * 12;
-
-  const annualDesired = desiredExp * 12 + travelAnnual;
-  const annualBasic = basicExp * 12 + travelAnnual;
-  const freedomTarget = swr > 0 ? annualDesired / swr : Infinity;
-  const securityTarget = swr > 0 ? annualBasic / swr : Infinity;
-  const dreamTarget = swr > 0 ? (dreamExp * 12 + travelAnnual) / swr : Infinity;
-  const emergencyTarget = basicExp * n("emMonths");
-
-  const tradingProfit = tradingBalance * monthlyTradingReturn;
-  const requiredR = risk > 0 && tradingBalance > 0 ? desiredMonthlyTotal / (tradingBalance * risk) : Infinity;
-  const minBalanceExpense = monthlyTradingReturn > 0 ? desiredMonthlyTotal / monthlyTradingReturn : Infinity;
-
-  const arr = simulate({
-    netWorth,
-    tradingBalance,
-    investMonthly,
-    income,
-    desiredMonthlyTotal,
-    annualReturn: .04,
-    monthlyTradingReturn,
-    withdrawPct,
-    months
-  });
-
-  const mtf = monthsToTarget(arr, freedomTarget);
-  const progress = freedomTarget > 0 ? Math.min((netWorth + tradingBalance) / freedomTarget, 1) : 0;
-
-  $("freedomTarget").innerText = money(freedomTarget);
-  $("timeToFreedom").innerText = ytext(mtf);
-  $("tradingProfit").innerText = money(tradingProfit);
-  $("tradingReturnText").innerText = `ماهانه ${pct(monthlyTradingReturn)} قبل از برداشت`;
-  $("effectiveR").innerText = effR.toFixed(1) + "R";
-  $("monthlyTradingReturn").innerText = pct(monthlyTradingReturn);
-  $("minBalanceExpense").innerText = money(minBalanceExpense);
-  $("requiredR").innerText = isFinite(requiredR) ? requiredR.toFixed(1) + "R" : "∞";
-
-  $("freedomBar").style.width = Math.round(progress * 100) + "%";
-  $("progressText").innerText =
-    `${Math.round(progress * 100)}٪ مسیر آزادی مالی. فاصله: ${money(Math.max(0, freedomTarget - (netWorth + tradingBalance)))}`;
-
-  let stage = "ثبات مالی";
-  let desc = "";
-
-  const total = netWorth + tradingBalance;
-
-  if (cash < emergencyTarget) {
-    stage = "ساخت صندوق اضطراری";
-    desc = `اولویت: تکمیل ${money(emergencyTarget)} نقد اضطراری.`;
-  } else if (total < securityTarget) {
-    stage = "ثبات مالی";
-    desc = "در مسیر هستی؛ هدف بعدی امنیت مالی است.";
-  } else if (total < freedomTarget) {
-    stage = "امنیت مالی";
-    desc = "هزینه پایه تا حد زیادی قابل پوشش است؛ هدف بعدی آزادی مالی کامل.";
-  } else if (total < dreamTarget) {
-    stage = "آزادی مالی";
-    desc = "سبک زندگی مطلوبت با برداشت امن قابل پوشش است.";
-  } else {
-    stage = "ثروت فراوان";
-    desc = "حتی سبک زندگی رویایی قابل پشتیبانی است.";
-  }
-
-  $("stage").innerText = stage;
-  $("stageDesc").innerText = desc;
-
-  const goals = [
-    ["خانه", n("house")],
-    ["ویلا", n("villa")],
-    ["خودرو", n("car")],
-    ["سفر سالانه هدف", n("travelGoal")]
-  ];
-
-  $("goals").innerHTML = goals.map(g => {
-    const target = g[1];
-    const m = monthsToTarget(arr, target);
-    return `• ${g[0]}: <b>${money(target)}</b> — با مدل فعلی: <b class="cyan">${ytext(m)}</b><br>`;
-  }).join("");
-
-  const w = [];
-
-  if (risk > .01) w.push("ریسک بالای ۱٪ برای هر ترید فشار روانی و Drawdown را زیاد می‌کند.");
-  if (monthlyTradingReturn > .08) w.push("بازده ماهانه بالای ۸٪ را برای برنامه‌ریزی بلندمدت محافظه‌کارانه فرض نکن.");
-  if (effR < 0) w.push("Expectancy منفی است؛ مدل ترید در بلندمدت سرمایه را کاهش می‌دهد.");
-  if (withdrawPct > .7) w.push("برداشت بیش از ۷۰٪ سود، رشد حساب ترید را کند می‌کند.");
-  if (cash < emergencyTarget) w.push("قبل از افزایش ریسک، صندوق اضطراری را کامل کن.");
-  if (swr > .04) w.push("نرخ برداشت امن بالای ۴٪ برای افق بلندمدت تهاجمی‌تر است.");
-  if (!w.length) w.push("فرضیات فعلی متعادل‌اند؛ سناریوهای بدبینانه را هم تست کن.");
-
-  $("warnings").innerHTML = w.map(x => "• " + x).join("<br>");
-
-  drawSingleSeriesChart({
-    canvasId: "wealthChart",
-    tooltipId: "wealthTooltip",
-    legendId: "wealthLegend",
-    data: arr.map(x => x.total),
-    years,
-    label: "Total Wealth",
-    targets: [
-      { v: securityTarget, c: "#60A5FA", t: "Security" },
-      { v: freedomTarget, c: "#67E8F9", t: "Freedom" },
-      { v: dreamTarget, c: "#FACC15", t: "Dream" }
-    ]
-  });
-
-  drawScenarioChartV2(freedomTarget, years);
-  renderScenarioCards(freedomTarget);
-
-  save();
-
-  if (withReaction) {
-    flashStatus();
-    toast("محاسبه شد و اطلاعات ذخیره شد.");
-  }
-}
-
-function scenarioData(riskPct, R) {
-  const netWorth = n("netWorth");
-  const tradingBalance = n("tradingBalance");
-  const desiredMonthlyTotal = n("desiredExp") + n("travelAnnual") / 12;
-
-  return simulate({
-    netWorth,
-    tradingBalance,
-    investMonthly: n("investMonthly"),
-    income: n("income"),
-    desiredMonthlyTotal,
-    annualReturn: .04,
-    monthlyTradingReturn: (riskPct / 100) * R,
-    withdrawPct: n("withdrawProfitPct") / 100,
-    months: n("years") * 12
-  });
-}
-
-function setScenario(type) {
-  if (type === "realistic") {
-    $("riskPerTrade").value = .5;
-    $("monthlyR").value = 6;
-    $("winRate").value = 45;
-    $("avgWinR").value = 2.2;
-    $("avgLossR").value = 1;
-    $("tradesPerMonth").value = 20;
-    $("withdrawProfitPct").value = 50;
-    toast("سناریوی منطقی اعمال شد.");
-  } else {
-    $("riskPerTrade").value = 1;
-    $("monthlyR").value = 8;
-    $("winRate").value = 48;
-    $("avgWinR").value = 2.3;
-    $("avgLossR").value = 1;
-    $("tradesPerMonth").value = 22;
-    $("withdrawProfitPct").value = 40;
-    toast("سناریوی تهاجمی اعمال شد.");
-  }
-
-  bumpInputs();
-  calc(true);
-}
-
-function renderScenarioCards(freedomTarget) {
-  const scenarios = [
-    ["محافظه‌کارانه", .25, 3],
-    ["منطقی", .5, 6],
-    ["تهاجمی", 1, 8],
-    ["خیلی پرریسک", 2, 10]
-  ];
-
-  $("scenarioCards").innerHTML = scenarios.map(s => {
-    const arr = scenarioData(s[1], s[2]);
-    const m = monthsToTarget(arr, freedomTarget);
-    const ret = (s[1] / 100) * s[2];
-
-    return `
-      <div class="scenario">
-        <b>${s[0]}</b>
-        <div class="note">
-          ریسک: ${s[1]}٪<br>
-          Monthly R: ${s[2]}R<br>
-          بازده ماهانه: ${pct(ret)}<br>
-          آزادی مالی: <span class="cyan">${ytext(m)}</span>
-        </div>
-      </div>
-    `;
-  }).join("");
+function renderScenarioCards(target){
+const s=[["محافظه‌کارانه",.25,3],["منطقی",.5,6],["تهاجمی",1,8],["خیلی پرریسک",2,10]];
+$("scenarioCards").innerHTML=s.map(x=>`<div class="scenario"><b>${x[0]}</b><div class="note">ریسک: ${x[1]}٪<br>Monthly R: ${x[2]}R<br>بازده ماهانه: ${pct((x[1]/100)*x[2])}<br>هدف کل زندگی: <span class="cyan">${ytext(monthsToTarget(scenarioData(x[1],x[2]),target))}</span></div></div>`).join("")
 }
 
 /* Charts */
-
-function setupCanvas(canvas) {
-  const rect = canvas.getBoundingClientRect();
-  const dpr = window.devicePixelRatio || 1;
-
-  canvas.width = Math.floor(rect.width * dpr);
-  canvas.height = Math.floor(rect.height * dpr);
-
-  const ctx = canvas.getContext("2d");
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-  return {
-    ctx,
-    width: rect.width,
-    height: rect.height
-  };
+function setup(c){let r=c.getBoundingClientRect(),d=devicePixelRatio||1;c.width=r.width*d;c.height=r.height*d;let ctx=c.getContext("2d");ctx.setTransform(d,0,0,d,0,0);return{ctx,w:r.width,h:r.height}}
+function niceMax(v){if(!isFinite(v)||v<=0)return 1000;let e=Math.floor(Math.log10(v)),b=10**e,f=v/b,n=f<=1?1:f<=2?2:f<=5?5:10;return n*b}
+function axes(ctx,D,maxY,years){
+let{l,r,t,b,cw,ch}=D;ctx.save();ctx.font="12px -apple-system";ctx.lineWidth=1;
+for(let i=0;i<=5;i++){let val=maxY*i/5,y=b-(val/maxY)*ch;ctx.strokeStyle="rgba(255,255,255,.12)";ctx.beginPath();ctx.moveTo(l,y);ctx.lineTo(r,y);ctx.stroke();ctx.fillStyle="rgba(255,255,255,.62)";ctx.textAlign="right";ctx.textBaseline="middle";ctx.fillText(compactMoney(val),l-10,y)}
+let xt=Math.min(6,Math.max(2,Math.round(years)));for(let i=0;i<=xt;i++){let yr=years*i/xt,x=l+i/xt*cw;ctx.strokeStyle="rgba(255,255,255,.075)";ctx.beginPath();ctx.moveTo(x,t);ctx.lineTo(x,b);ctx.stroke();ctx.fillStyle="rgba(255,255,255,.62)";ctx.textAlign="center";ctx.textBaseline="top";ctx.fillText(Math.round(yr)+"y",x,b+14)}
+ctx.strokeStyle="rgba(255,255,255,.22)";ctx.beginPath();ctx.moveTo(l,t);ctx.lineTo(l,b);ctx.lineTo(r,b);ctx.stroke();ctx.restore()
+}
+function drawTargets(ctx,D,maxY,targets){
+let{l,r,b,ch}=D;targets.forEach(x=>{if(!isFinite(x.v)||x.v<=0||x.v>maxY)return;let y=b-(x.v/maxY)*ch;ctx.save();ctx.strokeStyle=x.c;ctx.setLineDash([7,6]);ctx.beginPath();ctx.moveTo(l,y);ctx.lineTo(r,y);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle=x.c;ctx.font="12px -apple-system";ctx.textAlign="left";ctx.fillText(`${x.t} ${compactMoney(x.v)}`,l+8,y-5);ctx.restore()})
+}
+function drawSingle(cid,tid,lid,data,years,targets,label){
+let c=$(cid),tt=$(tid),leg=$(lid),S=setup(c),ctx=S.ctx,w=S.w,h=S.h,l=72,r=w-20,t=28,b=h-54,cw=r-l,ch=b-t,maxY=niceMax(Math.max(...data,...targets.map(x=>x.v))*1.08),D={l,r,t,b,cw,ch};
+ctx.clearRect(0,0,w,h);axes(ctx,D,maxY,years);drawTargets(ctx,D,maxY,targets);
+let xf=i=>l+i/(data.length-1)*cw,yf=v=>b-v/maxY*ch,g=ctx.createLinearGradient(l,0,r,0);g.addColorStop(0,"#8B5CF6");g.addColorStop(.55,"#67E8F9");g.addColorStop(1,"#22C55E");
+ctx.strokeStyle=g;ctx.lineWidth=4;ctx.lineJoin="round";ctx.lineCap="round";ctx.beginPath();data.forEach((v,i)=>i?ctx.lineTo(xf(i),yf(v)):ctx.moveTo(xf(i),yf(v)));ctx.stroke();
+leg.innerHTML=`<div class="legend-item"><span class="legend-dot" style="background:#67E8F9"></span>${label}: ${compactMoney(data[data.length-1])}</div>`+targets.map(x=>`<div class="legend-item"><span class="legend-dot" style="background:${x.c}"></span>${x.t}: ${compactMoney(x.v)}</div>`).join("");
+c.onmousemove=c.ontouchstart=e=>{let rect=c.getBoundingClientRect(),cx=e.touches?e.touches[0].clientX:e.clientX,x=cx-rect.left;if(x<l||x>r){tt.style.display="none";return}let idx=Math.max(0,Math.min(data.length-1,Math.round((x-l)/cw*(data.length-1))));tt.style.display="block";tt.style.left=Math.min(Math.max(x+12,8),w-170)+"px";tt.style.top="42px";tt.innerHTML=`<b>${(idx/12).toFixed(1)} سال</b><br>${label}: <b>${money(data[idx])}</b>`};
+c.onmouseleave=()=>tt.style.display="none"
+}
+function drawScenario(target,years){
+const sc=[["Conservative",.25,3,"#60A5FA"],["Realistic",.5,6,"#67E8F9"],["Aggressive",1,8,"#22C55E"],["High Risk",2,10,"#FB7185"]];
+let series=sc.map(s=>({name:`${s[0]} ${s[1]}%/${s[2]}R`,color:s[3],data:scenarioData(s[1],s[2]).map(x=>x.total)}));
+drawMulti("scenarioChart","scenarioTooltip","scenarioLegend",series,years,[{v:target,c:"#FACC15",t:"Total Life"}])
+}
+function drawMulti(cid,tid,lid,series,years,targets){
+let c=$(cid),tt=$(tid),leg=$(lid),S=setup(c),ctx=S.ctx,w=S.w,h=S.h,l=72,r=w-20,t=28,b=h-54,cw=r-l,ch=b-t,len=series[0].data.length,maxY=niceMax(Math.max(...series.flatMap(s=>s.data),...targets.map(x=>x.v))*1.08),D={l,r,t,b,cw,ch};
+ctx.clearRect(0,0,w,h);axes(ctx,D,maxY,years);drawTargets(ctx,D,maxY,targets);
+let xf=i=>l+i/(len-1)*cw,yf=v=>b-v/maxY*ch;
+series.forEach(s=>{ctx.strokeStyle=s.color;ctx.lineWidth=3.2;ctx.beginPath();s.data.forEach((v,i)=>i?ctx.lineTo(xf(i),yf(v)):ctx.moveTo(xf(i),yf(v)));ctx.stroke()});
+leg.innerHTML=series.map(s=>`<div class="legend-item"><span class="legend-dot" style="background:${s.color}"></span>${s.name}: ${compactMoney(s.data[len-1])}</div>`).join("");
+c.onmousemove=c.ontouchstart=e=>{let rect=c.getBoundingClientRect(),cx=e.touches?e.touches[0].clientX:e.clientX,x=cx-rect.left;if(x<l||x>r){tt.style.display="none";return}let idx=Math.max(0,Math.min(len-1,Math.round((x-l)/cw*(len-1))));tt.style.display="block";tt.style.left=Math.min(Math.max(x+12,8),w-210)+"px";tt.style.top="42px";tt.innerHTML=`<b>${(idx/12).toFixed(1)} سال</b><br>`+series.map(s=>`<span style="color:${s.color}">●</span> ${s.name}: <b>${money(s.data[idx])}</b>`).join("<br>")};
+c.onmouseleave=()=>tt.style.display="none"
 }
 
-function niceMax(value) {
-  if (!isFinite(value) || value <= 0) return 1000;
-
-  const exponent = Math.floor(Math.log10(value));
-  const base = Math.pow(10, exponent);
-  const fraction = value / base;
-
-  let niceFraction;
-  if (fraction <= 1) niceFraction = 1;
-  else if (fraction <= 2) niceFraction = 2;
-  else if (fraction <= 5) niceFraction = 5;
-  else niceFraction = 10;
-
-  return niceFraction * base;
-}
-
-function drawAxes(ctx, dims, maxY, years) {
-  const { left, right, top, bottom, chartW, chartH } = dims;
-
-  ctx.save();
-
-  ctx.strokeStyle = "rgba(255,255,255,.12)";
-  ctx.lineWidth = 1;
-  ctx.font = "12px -apple-system, BlinkMacSystemFont, sans-serif";
-  ctx.textBaseline = "middle";
-
-  const yTicks = 5;
-
-  for (let i = 0; i <= yTicks; i++) {
-    const value = maxY * (i / yTicks);
-    const y = bottom - (value / maxY) * chartH;
-
-    ctx.beginPath();
-    ctx.moveTo(left, y);
-    ctx.lineTo(right, y);
-    ctx.stroke();
-
-    ctx.fillStyle = "rgba(255,255,255,.62)";
-    ctx.textAlign = "right";
-    ctx.fillText(compactMoney(value), left - 10, y);
-  }
-
-  const xTicks = Math.min(6, Math.max(2, Math.round(years)));
-
-  for (let i = 0; i <= xTicks; i++) {
-    const year = years * (i / xTicks);
-    const x = left + (i / xTicks) * chartW;
-
-    ctx.strokeStyle = "rgba(255,255,255,.075)";
-    ctx.beginPath();
-    ctx.moveTo(x, top);
-    ctx.lineTo(x, bottom);
-    ctx.stroke();
-
-    ctx.fillStyle = "rgba(255,255,255,.62)";
-    ctx.textAlign = "center";
-    ctx.textBaseline = "top";
-    ctx.fillText(Math.round(year) + "y", x, bottom + 14);
-  }
-
-  ctx.strokeStyle = "rgba(255,255,255,.22)";
-  ctx.lineWidth = 1.2;
-
-  ctx.beginPath();
-  ctx.moveTo(left, top);
-  ctx.lineTo(left, bottom);
-  ctx.lineTo(right, bottom);
-  ctx.stroke();
-
-  ctx.fillStyle = "rgba(255,255,255,.45)";
-  ctx.font = "11px -apple-system, BlinkMacSystemFont, sans-serif";
-
-  ctx.textAlign = "left";
-  ctx.textBaseline = "top";
-  ctx.fillText("Years", right - 34, bottom + 32);
-
-  ctx.save();
-  ctx.translate(12, top + 60);
-  ctx.rotate(-Math.PI / 2);
-  ctx.textAlign = "center";
-  ctx.fillText("Portfolio Value USD", 0, 0);
-  ctx.restore();
-
-  ctx.restore();
-}
-
-function drawTargetLines(ctx, dims, maxY, targets) {
-  const { left, right, bottom, chartH } = dims;
-
-  targets.forEach(t => {
-    if (!isFinite(t.v) || t.v <= 0 || t.v > maxY) return;
-
-    const y = bottom - (t.v / maxY) * chartH;
-
-    ctx.save();
-    ctx.strokeStyle = t.c;
-    ctx.lineWidth = 1.4;
-    ctx.setLineDash([7, 6]);
-
-    ctx.beginPath();
-    ctx.moveTo(left, y);
-    ctx.lineTo(right, y);
-    ctx.stroke();
-
-    ctx.setLineDash([]);
-    ctx.fillStyle = t.c;
-    ctx.font = "12px -apple-system, BlinkMacSystemFont, sans-serif";
-    ctx.textAlign = "left";
-    ctx.textBaseline = "bottom";
-    ctx.fillText(`${t.t} ${compactMoney(t.v)}`, left + 8, y - 5);
-
-    ctx.restore();
-  });
-}
-
-function drawSingleSeriesChart({
-  canvasId,
-  tooltipId,
-  legendId,
-  data,
-  targets = [],
-  years,
-  label = "Total Wealth",
-  colorStart = "#8B5CF6",
-  colorMid = "#67E8F9",
-  colorEnd = "#22C55E"
-}) {
-  const canvas = $(canvasId);
-  const tooltip = $(tooltipId);
-  const legend = $(legendId);
-
-  const { ctx, width, height } = setupCanvas(canvas);
-
-  const left = 72;
-  const right = width - 20;
-  const top = 28;
-  const bottom = height - 54;
-  const chartW = right - left;
-  const chartH = bottom - top;
-
-  const rawMax = Math.max(
-    ...data,
-    ...targets.map(t => t.v).filter(v => isFinite(v))
-  );
-
-  const maxY = niceMax(rawMax * 1.08);
-  const dims = { width, height, left, right, top, bottom, chartW, chartH };
-
-  ctx.clearRect(0, 0, width, height);
-
-  drawAxes(ctx, dims, maxY, years);
-  drawTargetLines(ctx, dims, maxY, targets);
-
-  const xFor = i => left + (i / (data.length - 1)) * chartW;
-  const yFor = v => bottom - (v / maxY) * chartH;
-
-  const grad = ctx.createLinearGradient(left, 0, right, 0);
-  grad.addColorStop(0, colorStart);
-  grad.addColorStop(.55, colorMid);
-  grad.addColorStop(1, colorEnd);
-
-  ctx.save();
-  ctx.beginPath();
-
-  data.forEach((v, i) => {
-    const x = xFor(i);
-    const y = yFor(v);
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  });
-
-  ctx.lineTo(right, bottom);
-  ctx.lineTo(left, bottom);
-  ctx.closePath();
-
-  const area = ctx.createLinearGradient(0, top, 0, bottom);
-  area.addColorStop(0, "rgba(103,232,249,.18)");
-  area.addColorStop(1, "rgba(103,232,249,0)");
-  ctx.fillStyle = area;
-  ctx.fill();
-  ctx.restore();
-
-  ctx.save();
-  ctx.strokeStyle = grad;
-  ctx.lineWidth = 4;
-  ctx.lineJoin = "round";
-  ctx.lineCap = "round";
-  ctx.beginPath();
-
-  data.forEach((v, i) => {
-    const x = xFor(i);
-    const y = yFor(v);
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
-  });
-
-  ctx.stroke();
-  ctx.restore();
-
-  const lastValue = data[data.length - 1];
-  const lastX = xFor(data.length - 1);
-  const lastY = yFor(lastValue);
-
-  ctx.save();
-  ctx.fillStyle = colorEnd;
-  ctx.beginPath();
-  ctx.arc(lastX, lastY, 5, 0, Math.PI * 2);
-  ctx.fill();
-
-  ctx.fillStyle = "rgba(255,255,255,.86)";
-  ctx.font = "12px -apple-system, BlinkMacSystemFont, sans-serif";
-  ctx.textAlign = "right";
-  ctx.textBaseline = "bottom";
-  ctx.fillText(compactMoney(lastValue), lastX - 8, lastY - 8);
-  ctx.restore();
-
-  if (legend) {
-    legend.innerHTML = `
-      <div class="legend-item">
-        <span class="legend-dot" style="background:${colorMid}"></span>
-        ${label}: ${compactMoney(lastValue)}
-      </div>
-      ${targets.map(t => `
-        <div class="legend-item">
-          <span class="legend-dot" style="background:${t.c}"></span>
-          ${t.t}: ${compactMoney(t.v)}
-        </div>
-      `).join("")}
-    `;
-  }
-
-  function handlePointer(evt) {
-    const rect = canvas.getBoundingClientRect();
-    const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-    const x = clientX - rect.left;
-
-    if (x < left || x > right) {
-      tooltip.style.display = "none";
-      return;
-    }
-
-    const ratio = (x - left) / chartW;
-    const idx = Math.max(0, Math.min(data.length - 1, Math.round(ratio * (data.length - 1))));
-    const value = data[idx];
-    const year = idx / 12;
-
-    tooltip.style.display = "block";
-    tooltip.style.left = Math.min(Math.max(x + 12, 8), width - 165) + "px";
-    tooltip.style.top = "42px";
-    tooltip.innerHTML = `
-      <b>${year.toFixed(1)} سال</b><br>
-      ${label}: <b>${money(value)}</b>
-    `;
-  }
-
-  canvas.onmousemove = handlePointer;
-  canvas.ontouchstart = handlePointer;
-  canvas.ontouchmove = evt => {
-    evt.preventDefault();
-    handlePointer(evt);
-  };
-  canvas.onmouseleave = () => {
-    tooltip.style.display = "none";
-  };
-}
-
-function drawMultiSeriesChart({
-  canvasId,
-  tooltipId,
-  legendId,
-  series,
-  targets = [],
-  years
-}) {
-  const canvas = $(canvasId);
-  const tooltip = $(tooltipId);
-  const legend = $(legendId);
-
-  const { ctx, width, height } = setupCanvas(canvas);
-
-  const left = 72;
-  const right = width - 20;
-  const top = 28;
-  const bottom = height - 54;
-  const chartW = right - left;
-  const chartH = bottom - top;
-
-  const allValues = series.flatMap(s => s.data);
-  const rawMax = Math.max(...allValues, ...targets.map(t => t.v).filter(v => isFinite(v)));
-  const maxY = niceMax(rawMax * 1.08);
-  const dims = { width, height, left, right, top, bottom, chartW, chartH };
-
-  ctx.clearRect(0, 0, width, height);
-
-  drawAxes(ctx, dims, maxY, years);
-  drawTargetLines(ctx, dims, maxY, targets);
-
-  const len = series[0]?.data.length || 1;
-  const xFor = i => left + (i / (len - 1)) * chartW;
-  const yFor = v => bottom - (v / maxY) * chartH;
-
-  series.forEach(s => {
-    ctx.save();
-    ctx.strokeStyle = s.color;
-    ctx.lineWidth = 3.2;
-    ctx.lineJoin = "round";
-    ctx.lineCap = "round";
-    ctx.beginPath();
-
-    s.data.forEach((v, i) => {
-      const x = xFor(i);
-      const y = yFor(v);
-      if (i === 0) ctx.moveTo(x, y);
-      else ctx.lineTo(x, y);
-    });
-
-    ctx.stroke();
-
-    const last = s.data[s.data.length - 1];
-    const lx = xFor(s.data.length - 1);
-    const ly = yFor(last);
-
-    ctx.fillStyle = s.color;
-    ctx.beginPath();
-    ctx.arc(lx, ly, 4, 0, Math.PI * 2);
-    ctx.fill();
-
-    ctx.restore();
-  });
-
-  if (legend) {
-    legend.innerHTML = series.map(s => {
-      const last = s.data[s.data.length - 1];
-      return `
-        <div class="legend-item">
-          <span class="legend-dot" style="background:${s.color}"></span>
-          ${s.name}: ${compactMoney(last)}
-        </div>
-      `;
-    }).join("");
-  }
-
-  function handlePointer(evt) {
-    const rect = canvas.getBoundingClientRect();
-    const clientX = evt.touches ? evt.touches[0].clientX : evt.clientX;
-    const x = clientX - rect.left;
-
-    if (x < left || x > right) {
-      tooltip.style.display = "none";
-      return;
-    }
-
-    const ratio = (x - left) / chartW;
-    const idx = Math.max(0, Math.min(len - 1, Math.round(ratio * (len - 1))));
-    const year = idx / 12;
-
-    tooltip.style.display = "block";
-    tooltip.style.left = Math.min(Math.max(x + 12, 8), width - 205) + "px";
-    tooltip.style.top = "42px";
-    tooltip.innerHTML = `
-      <b>${year.toFixed(1)} سال</b><br>
-      ${series.map(s => `
-        <span style="color:${s.color}">●</span>
-        ${s.name}: <b>${money(s.data[idx])}</b>
-      `).join("<br>")}
-    `;
-  }
-
-  canvas.onmousemove = handlePointer;
-  canvas.ontouchstart = handlePointer;
-  canvas.ontouchmove = evt => {
-    evt.preventDefault();
-    handlePointer(evt);
-  };
-  canvas.onmouseleave = () => {
-    tooltip.style.display = "none";
-  };
-}
-
-function drawScenarioChartV2(freedomTarget, years) {
-  const scenarios = [
-    { name: "Conservative 0.25% / 3R", risk: .25, R: 3, color: "#60A5FA" },
-    { name: "Realistic 0.5% / 6R", risk: .5, R: 6, color: "#67E8F9" },
-    { name: "Aggressive 1% / 8R", risk: 1, R: 8, color: "#22C55E" },
-    { name: "High Risk 2% / 10R", risk: 2, R: 10, color: "#FB7185" }
-  ];
-
-  const series = scenarios.map(s => {
-    const arr = scenarioData(s.risk, s.R);
-    return {
-      name: s.name,
-      color: s.color,
-      data: arr.map(x => x.total)
-    };
-  });
-
-  drawMultiSeriesChart({
-    canvasId: "scenarioChart",
-    tooltipId: "scenarioTooltip",
-    legendId: "scenarioLegend",
-    series,
-    years,
-    targets: [
-      { v: freedomTarget, c: "#FACC15", t: "Freedom" }
-    ]
-  });
-}
-
-/* Boot */
-
-ids.forEach(id => {
-  window.addEventListener("load", () => {
-    const el = $(id);
-    if (!el) return;
-
-    el.addEventListener("input", () => calc(false));
-    el.addEventListener("change", () => calc(false));
-  });
-});
-
+ids.forEach(id=>window.addEventListener("load",()=>{let el=$(id);if(el){el.addEventListener("input",()=>calc(false));el.addEventListener("change",()=>calc(false))}}));
 load();
-
-window.addEventListener("load", () => {
-  calc(false);
-  toast("اپ آماده است. اطلاعات به صورت لوکال ذخیره می‌شود.");
-});
-
-window.addEventListener("resize", () => {
-  clearTimeout(window.__chartResizeTimer);
-  window.__chartResizeTimer = setTimeout(() => calc(false), 250);
-});
+window.addEventListener("load",()=>{calc(false);toast("اپ آماده است. اطلاعات ذخیره می‌شود.")});
+window.addEventListener("resize",()=>{clearTimeout(window.__r);window.__r=setTimeout(()=>calc(false),250)});
 </script>
 </body>
 </html>
